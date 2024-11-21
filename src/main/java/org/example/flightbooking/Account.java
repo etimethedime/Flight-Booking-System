@@ -15,9 +15,6 @@ public class Account {
     private String currentFlight;
     private int secPIN;
 
-    public Account () {
-    }
-
     public Account (String firstName, String lastName, String street, String zipCode, String state, String username,
                     String password, String email, long SSN, String secQuestion, String secAnswer, String currentFlight, int secPIN) {
         this.firstName = firstName;
