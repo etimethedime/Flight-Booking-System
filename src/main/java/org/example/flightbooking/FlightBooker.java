@@ -3,11 +3,11 @@ package org.example.flightbooking;
 import java.util.ArrayList;
 
 public abstract class FlightBooker {
-    private ArrayList flightsAvailable;
-    private ArrayList flightsBooked;
-    private ArrayList seatsAvailable;
-    private ArrayList seatsBooked;
-    private ArrayList accommodations;
+    //ArrayList flightsAvailable;
+    //ArrayList flightsBooked;
+    //seatsAvailable;
+    //seatsBooked;
+    //accommodations;
 
     public abstract void BookFlight();
     public abstract void RetrievePassword();
