@@ -33,6 +33,14 @@ public class Account {
         //have a Scanner in the main file bascially asking to set these.
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
     public String getPasswords() {
         // input will ask secQuestion and ask for secAnswer
         // if input is correct (matches) it'll return password.
