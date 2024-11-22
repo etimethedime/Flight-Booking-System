@@ -16,7 +16,7 @@ public class Account {
     private int secPIN;
 
     public Account (String firstName, String lastName, String street, String zipCode, String state, String username,
-                    String password, String email, long SSN, String secQuestion, String secAnswer, String currentFlight, int secPIN) {
+                    String password, String email, long SSN, String secQuestion, String secAnswer, int secPIN) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.street = street;
@@ -28,7 +28,6 @@ public class Account {
         this.SSN = SSN;
         this.secQuestion = secQuestion;
         this.secAnswer = secAnswer;
-        this.currentFlight = currentFlight;
         this.secPIN = secPIN;
         //have a Scanner in the main file bascially asking to set these.
     }
