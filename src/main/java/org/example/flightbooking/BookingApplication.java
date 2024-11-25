@@ -97,7 +97,7 @@ public class BookingApplication extends Application{
         stackLogIn.getChildren().addAll(l3, leaveLogIn);
         logInScene = new Scene(stackLogIn,400, 400);
 
-                //finaly show your app
+                //finally show your app
         window.setScene(openScene);
         window.setTitle("CME Bookings");
         window.show();
