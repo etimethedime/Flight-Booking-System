@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
-      fx:controller="org.example.flightbooking.BookingApplication"
+      fx:controller="org.example.flightbooking.BookingApplicationController"
       prefHeight="400.0" prefWidth="600.0" spacing="20">
 
    <Label text="Welcome to CME Bookings!" />
 
-   <Button fx:id="logInButton" text="Log In" />
+   <Button fx:id="logInButton" text="Log In" onAction="#handleLogInButtonClick"/>
 
-   <Button fx:id="registerButton" text="Register" />
+   <Button fx:id="registerButton" text="Register" onAction="#handleRegisterButtonClick"/>
 
 </VBox>
