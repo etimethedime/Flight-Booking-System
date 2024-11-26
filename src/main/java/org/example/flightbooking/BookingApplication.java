@@ -3,6 +3,9 @@ package org.example.flightbooking;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -12,10 +15,14 @@ import javafx.stage.Stage;
 
 public class BookingApplication extends Application{
     //Buttons
-    Button registerButton;
-    Button logInButton;
-    Button leaveRegister;
-    Button leaveLogIn;
+    @FXML
+    private Button registerButton;
+    @FXML
+    private Button logInButton;
+    @FXML
+    private Button leaveRegister;
+    @FXML
+    private Button leaveLogIn;
 
     //Stages
     Stage window;
@@ -81,11 +88,12 @@ public class BookingApplication extends Application{
                 // Layout 1 = VBOX - sets children in a vertical stack
 
         //the open scene
-        VBox vboxOpenScene = new VBox(20); // the value spaces out the children (aka the buttons)
-        vboxOpenScene.getChildren().addAll(l1, logInButton, registerButton); // add( ) adds in one button. addAll( ) adds all buttons.
-        openScene = new Scene(vboxOpenScene, 400, 400);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/flightbooking/openScene.fxml"));
+        Parent root = loader.load();
+        openScene = new Scene(root, 400, 400);
 
-                //Layout 2 = StackPane - stacks children on in front (or on top) of each other
+
+        //Layout 2 = StackPane - stacks children on in front (or on top) of each other
 
         //the register scene
         StackPane stackRegister = new StackPane();
