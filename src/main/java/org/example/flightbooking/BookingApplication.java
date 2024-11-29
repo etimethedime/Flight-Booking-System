@@ -30,6 +30,7 @@ public class BookingApplication extends Application{
         registerScene = new Scene(registerSceneRoot);
 
 
+
     }
 
 
@@ -39,3 +40,4 @@ public class BookingApplication extends Application{
 
 
 }
+
