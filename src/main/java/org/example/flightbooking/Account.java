@@ -9,14 +9,14 @@ public class Account {
     private String username;
     private String password;
     private String email;
-    private long SSN;
+    private String  SSN;
     private String secQuestion;
     private String secAnswer;
     private String currentFlight;
-    private int secPIN;
+    private String secPIN;
 
     public Account (String firstName, String lastName, String street, String zipCode, String state, String username,
-                    String password, String email, long SSN, String secQuestion, String secAnswer, int secPIN) {
+                    String password, String email, String SSN, String secQuestion, String secAnswer, String secPIN) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.street = street;
@@ -61,7 +61,7 @@ public class Account {
                 "\nEMAIL: " + this.email;
     }
 
-    public long getSSN() {
+    public String getSSN() {
         //ask for secPIN
         return SSN;
     }

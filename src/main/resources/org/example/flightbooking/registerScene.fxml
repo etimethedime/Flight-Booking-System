@@ -34,7 +34,7 @@
             <TextField layoutX="10.0" layoutY="215.0" promptText="Answer" />
             <HBox spacing="8.0">
                <children>
-                  <Button mnemonicParsing="false" text="Register">
+                  <Button mnemonicParsing="false" onAction="#handleRegister" text="Register">
                      <padding>
                         <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                      </padding>

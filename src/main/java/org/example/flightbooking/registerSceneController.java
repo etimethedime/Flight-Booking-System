@@ -11,18 +11,18 @@ import java.io.IOException;
 import java.util.Objects;
 
 public class registerSceneController {
-    private TextField firstName;
-    private TextField lastName;
-    private TextField street;
-    private TextField zipCode;
-    private TextField state;
-    private TextField username;
-    private TextField password;
-    private TextField email;
-    private TextField SSN;
-    private TextField secQuestion;
-    private TextField secAnswer;
-    private TextField secPIN;
+    private TextField firstName = new TextField();
+    private TextField lastName = new TextField();
+    private TextField street = new TextField();
+    private TextField zipCode = new TextField();
+    private TextField state =  new TextField();
+    private TextField username =  new TextField();
+    private TextField password =  new TextField();
+    private TextField email =  new TextField();
+    private TextField SSN = new TextField();
+    private TextField  secQuestion =  new TextField();
+    private TextField secAnswer = new TextField();
+    private TextField secPIN =  new TextField();
     public Stage window;
     public Scene openScene;
     public Parent openSceneRoot;
@@ -41,16 +41,17 @@ public class registerSceneController {
         String username = this.username.getText();
         String password = this.password.getText();
         String email = this.email.getText();
-        long SSN = Long.parseLong(this.SSN.getText());
+        String SSN = this.SSN.getText();
         String secQuestion = this.secQuestion.getText();
         String secAnswer = this.secAnswer.getText();
-        int secPIN = Integer.parseInt(this.secPIN.getText());
+        String secPIN = this.secPIN.getText();
 
         Customer customer = new Customer(firstName,lastName,street,zipCode,state,username,password,email,SSN,secQuestion, secAnswer, secPIN);
         //add method to add customer object to database
     }
     public void handleRegister (ActionEvent event) throws IOException{
-
+        Register();
+        System.out.println("Account created!");
     }
     public void handleLeaveRegister (ActionEvent event) throws IOException {
         openSceneRoot = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("openScene.fxml")));
