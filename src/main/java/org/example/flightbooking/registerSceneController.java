@@ -47,6 +47,7 @@ public class registerSceneController {
         int secPIN = Integer.parseInt(this.secPIN.getText());
 
         Customer customer = new Customer(firstName,lastName,street,zipCode,state,username,password,email,SSN,secQuestion, secAnswer, secPIN);
+        //add method to add customer object to database
     }
     public void handleRegister (ActionEvent event) throws IOException{
 
