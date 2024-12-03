@@ -30,8 +30,8 @@
     <connection id="b305f4e7-9b09-46d7-b35a-e050e18fcf81" />
   </component>
   <component name="DBNavigator.Project.DatasetFilterManager">
-    <filter-actions connection-id="b305f4e7-9b09-46d7-b35a-e050e18fcf81" dataset="flightbooker.flight_details" active-filter-id="" />
-    <filter-actions connection-id="b305f4e7-9b09-46d7-b35a-e050e18fcf81" dataset="flightbooker.admin" active-filter-id="a88c9378-476b-48e2-812a-57ee2e7b4fd6">
+    <filter-actions connection-id="b305f4e7-9b09-46d7-b35a-e050e18fcf81" dataset="flightbooker.flight_details" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="b305f4e7-9b09-46d7-b35a-e050e18fcf81" dataset="flightbooker.admin" active-filter-id="">
       <filter id="a88c9378-476b-48e2-812a-57ee2e7b4fd6" name="Filter 1" temporary="false" custom-name="false" type="basic" join-type="AND">
         <condition column="Employee_ID" operator="=" value="" active="true" />
       </filter>
