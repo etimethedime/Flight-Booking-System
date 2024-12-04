@@ -6,6 +6,7 @@ public abstract interface FlightBooker {
 
     //this will hold all the queries to get data from the database
 
+    public abstract void register(); // should get registration information and add a new customer using INSERT
     public abstract void logIn(); // should get username and password using SELECT Query
     public abstract void bookFlight(); // should add a booked flight using INSERT query
     public abstract void retrievePassword(); // should get password using SELECT query
