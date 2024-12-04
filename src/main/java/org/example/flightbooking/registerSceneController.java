@@ -11,6 +11,8 @@ import java.io.IOException;
 import java.util.Objects;
 
 public class registerSceneController {
+
+    private TextField query = new TextField();
     private TextField firstName = new TextField();
     private TextField lastName = new TextField();
     private TextField street = new TextField();
@@ -33,6 +35,7 @@ public class registerSceneController {
 
 
     public void Register(){
+        String s = query.getText();
         String firstName = this.firstName.getText();
         String lastName = this.lastName.getText();
         String street = this.street.getText();
@@ -47,7 +50,7 @@ public class registerSceneController {
         String secPIN = this.secPIN.getText();
 
         Customer customer = new Customer(firstName,lastName,street,zipCode,state,username,password,email,SSN,secQuestion, secAnswer, secPIN);
-        //add method to add customer object to database
+        //customer class should have method to add newly registered user into database
     }
     public void handleRegister (ActionEvent event) throws IOException{
         Register();
