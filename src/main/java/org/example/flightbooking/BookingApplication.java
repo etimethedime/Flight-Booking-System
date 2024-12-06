@@ -10,7 +10,7 @@ public class BookingApplication extends Application{
     //Scenes
     Scene openScene, logInScene, registerScene;
 
-
+//miki was here
     @Override
     public void start(Stage window) throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/flightbooking/openScene.fxml"));
