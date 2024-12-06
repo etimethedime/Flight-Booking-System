@@ -7,7 +7,7 @@ public class Queries {
                         "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?); ";// INSERT
     public static final String LOGIN = "SELECT * FROM User WHERE Username = ? AND Password = ?"; // SELECT
     public static final String FORGOTPASSWORD = "SELECT Password FROM User WHERE Username = ? AND SecurityQuestion = ? AND SecurityAnswer = ?"; //SELECT
-    public static final String CHANGEPASSWORD = ""; // UPDATE
+    public static final String CHANGEPASSWORD = "UPDATE User SET Password = ? WHERE Username =  ?"; // UPDATE
 
 
 
