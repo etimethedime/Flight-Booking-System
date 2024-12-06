@@ -3,6 +3,7 @@ package org.example.flightbooking;
 import java.util.Scanner;
 
 public class Runner {
+    //for laughs and giggles
     public static void main(String[] args) {
         String firstName;
         String lastName;
@@ -12,10 +13,10 @@ public class Runner {
         String username;
         String password;
         String email;
-        long SSN;
+        String SSN;
         String secQuestion;
         String secAnswer;
-        int secPIN;
+        String secPIN;
 
 
         Scanner input = new Scanner (System.in);
@@ -52,7 +53,7 @@ public class Runner {
 
                     System.out.println("Enter your SSN");
                     //make an if statement where it checks if the input follows the requirements using the string thingy
-                    SSN = registerInput.nextLong();
+                    SSN = registerInput.next();
 
                     System.out.println("Enter your Security Question: ");
                     secQuestion = registerInput.nextLine();
@@ -61,7 +62,7 @@ public class Runner {
                     secAnswer = registerInput.nextLine();
 
                     System.out.println("Enter your security PIN");
-                    secPIN = registerInput.nextInt();
+                    secPIN = registerInput.next();
 
                     Admin admin1 = new Admin(firstName, lastName, street,
                             zipCode, state, username,
@@ -110,7 +111,7 @@ public class Runner {
 
                     System.out.println("Enter your SSN");
                     //make an if statement where it checks if the input follows the requirements using the string thingy
-                    SSN = registerInput.nextLong();
+                    SSN = registerInput.next();
 
                     System.out.println("Enter your Security Question: ");
                     secQuestion = registerInput.nextLine();
@@ -119,7 +120,7 @@ public class Runner {
                     secAnswer = registerInput.nextLine();
 
                     System.out.println("Enter your security PIN");
-                    secPIN = registerInput.nextInt();
+                    secPIN = registerInput.next();
 
                     Customer customer1 = new Customer(firstName, lastName, street,
                             zipCode, state, username,
