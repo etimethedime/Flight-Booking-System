@@ -93,6 +93,5 @@
          <RowConstraints />
       </rowConstraints>
    </GridPane>
-   <Button layoutX="77.0" layoutY="326.0" mnemonicParsing="false" text="Button" />
 
 </AnchorPane>
