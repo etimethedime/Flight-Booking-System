@@ -15,8 +15,8 @@ public class logInSceneController {
 
     public Stage window;
     public Scene openScene;
-    public Parent openSceneRoot;
     public Scene AvailableFlightsScene;
+    public Parent openSceneRoot;
     public Parent AvailableFlightsRoot;
 
     @FXML
