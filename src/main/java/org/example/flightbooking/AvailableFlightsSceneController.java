@@ -18,6 +18,8 @@ import java.util.Objects;
 public class AvailableFlightsSceneController {
 
     private Parent openSceneRoot;
+    private Parent AccountSettingsRoot;
+    private Scene AccountSettingsScene;
     private Scene openScene;
     private Stage window;
 
@@ -53,12 +55,16 @@ public class AvailableFlightsSceneController {
     }
 
     @FXML
-    private void handleAccountSettingsButtonClick() {
-        System.out.println("Account Settings clicked");
+    private void handleAccountSettingsButtonClick(ActionEvent event) throws Exception {
+        AccountSettingsRoot = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("AccountSettingsScene.fxml")));
+        window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        AccountSettingsScene = new Scene(AccountSettingsRoot);
+        window.setScene(AccountSettingsScene);
+        window.show();
     }
 
     @FXML
-    private void handleSignOffButtonClick(ActionEvent event) throws IOException {
+    private void handleSignOffButtonClick(ActionEvent event) throws Exception {
         openSceneRoot = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("openScene.fxml")));
         window = (Stage) ((Node)event.getSource()).getScene().getWindow();
         openScene = new Scene(openSceneRoot);

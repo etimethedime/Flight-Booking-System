@@ -26,15 +26,13 @@ public class registerSceneController {
     private TextField secAnswer = new TextField();
     private TextField secPIN =  new TextField();
     public Stage window;
-    public Scene openScene;
-    public Parent openSceneRoot;
-    public Scene nextScene;
-    public Parent nextRoot;
+    public Scene AvailableFlightsScene;
+    public Parent AvailableFlightsRoot;
     public Scene logInScene;
     public Parent logInRoot;
 
 
-    public void Register(){
+    public void handleRegister(ActionEvent event) throws IOException {
         String s = query.getText();
         String firstName = this.firstName.getText();
         String lastName = this.lastName.getText();
@@ -49,19 +47,15 @@ public class registerSceneController {
         String secAnswer = this.secAnswer.getText();
         String secPIN = this.secPIN.getText();
 
-        Customer customer = new Customer(firstName,lastName,street,zipCode,state,username,password,email,SSN,secQuestion, secAnswer, secPIN);
+        //Customer customer = new Customer(firstName,lastName,street,zipCode,state,username,password,email,SSN,secQuestion, secAnswer, secPIN);
         //customer class should have method to add newly registered user into database
-    }
-    public void handleRegister (ActionEvent event) throws IOException{
-        Register();
-        System.out.println("Account created!");
-    }
-    public void handleLeaveRegister (ActionEvent event) throws IOException {
-        openSceneRoot = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("openScene.fxml")));
+
+        AvailableFlightsRoot = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("AvaialableFlightsScene.fxml")));
         window = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        openScene = new Scene(openSceneRoot);
-        window.setScene(openScene);
+        AvailableFlightsScene = new Scene(AvailableFlightsRoot);
+        window.setScene(AvailableFlightsScene);
         window.show();
+
     }
 
     public void handleLogInButtonClick(ActionEvent event) throws IOException {
