@@ -1,62 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.flightbooking.logInSceneController">
-    <top>
-        <VBox BorderPane.alignment="CENTER">
-            <children>
-                <MenuBar>
-                    <menus>
-                        <Menu mnemonicParsing="false" text="File">
-                            <items>
-                                <MenuItem mnemonicParsing="false" text="Close" />
-                            </items>
-                        </Menu>
-                        <Menu mnemonicParsing="false" text="Edit">
-                            <items>
-                                <MenuItem mnemonicParsing="false" text="Delete" />
-                            </items>
-                        </Menu>
-                        <Menu mnemonicParsing="false" text="Help">
-                            <items>
-                                <MenuItem mnemonicParsing="false" text="About" />
-                            </items>
-                        </Menu>
-                        <Menu mnemonicParsing="false" text="Unspecified Menu">
-                            <items>
-                                <MenuItem mnemonicParsing="false" text="Action 1" />
-                            </items>
-                        </Menu>
-                    </menus>
-                </MenuBar>
-                <HBox spacing="10.0">
-                    <children>
-                        <TextField promptText="Username" />
-                        <PasswordField promptText="Password" />
-                        <Button mnemonicParsing="false" text="Log In" />
-                        <Region prefHeight="26.0" prefWidth="114.0" HBox.hgrow="ALWAYS" />
-                  <Region HBox.hgrow="ALWAYS" />
-                  <Button layoutX="542.0" layoutY="12.0" mnemonicParsing="false" onAction="#handleLeaveLogIn" text="Go Back" />
-                    </children>
-                    <VBox.margin>
-                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
-                    </VBox.margin>
-                    <padding>
-                        <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
-                    </padding>
-                </HBox>
-            </children>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.flightbooking.logInSceneController" style="-fx-background-color: linear-gradient(to bottom, #cce7ff, #e6ffee);">
+    <children>
+        <VBox alignment="CENTER" spacing="20.0" style="-fx-padding: 40;" AnchorPane.topAnchor="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+            <TextField promptText="Username" style="-fx-background-color: #f4f4f4; -fx-prompt-text-fill: #7cc47c; -fx-font-size: 16; -fx-background-radius: 10; -fx-padding: 10;" prefWidth="250.0" maxWidth="250.0" minWidth="250.0">
+            </TextField>
+            <PasswordField promptText="Password" style="-fx-background-color: #f4f4f4; -fx-prompt-text-fill: #7cc47c; -fx-font-size: 16; -fx-background-radius: 10; -fx-padding: 10;" prefWidth="250.0" maxWidth="250.0" minWidth="250.0">
+            </PasswordField>
+            <Button text="Log In" style="-fx-background-color: #a8d5a8; -fx-text-fill: #ffffff; -fx-font-size: 17; -fx-background-radius: 10; -fx-padding: 10;">
+            </Button>
+            <Button text="Go Back" onAction="#handleLeaveLogIn" style="-fx-background-color: transparent; -fx-text-fill: #88c488; -fx-font-size: 14; -fx-underline: true;">
+            </Button>
         </VBox>
-    </top>
-</BorderPane>
+    </children>
+</AnchorPane>
