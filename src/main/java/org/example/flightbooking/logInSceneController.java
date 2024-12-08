@@ -1,10 +1,13 @@
 package org.example.flightbooking;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
+import javafx.stage.Window;
+
 import java.io.IOException;
 import java.util.Objects;
 
@@ -13,10 +16,17 @@ public class logInSceneController {
     public Stage window;
     public Scene openScene;
     public Parent openSceneRoot;
-    public Scene nextScene;
-    public Parent nextRoot;
+    public Scene AvailableFlightsScene;
+    public Parent AvailableFlightsRoot;
 
-    public void handleSuccessfulLogIn (){
+    @FXML
+    private void handleSuccessfulLogin(ActionEvent event) throws IOException {
+        // Load the Available Flights Scene
+        AvailableFlightsRoot = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("AvaialableFlightsScene.fxml")));
+        window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        AvailableFlightsScene = new Scene(AvailableFlightsRoot);
+        window.setScene(AvailableFlightsScene);
+        window.show();
         // call customer class method to log in using SELECT QUERY
         // upon successful login, user is taken to next scene
     }

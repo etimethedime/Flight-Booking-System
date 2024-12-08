@@ -13,7 +13,7 @@
             </TextField>
             <PasswordField promptText="Password" style="-fx-background-color: #f4f4f4; -fx-prompt-text-fill: #7cc47c; -fx-font-size: 16; -fx-background-radius: 10; -fx-padding: 10;" prefWidth="250.0" maxWidth="250.0" minWidth="250.0">
             </PasswordField>
-            <Button text="Log In" style="-fx-background-color: #a8d5a8; -fx-text-fill: #ffffff; -fx-font-size: 17; -fx-background-radius: 10; -fx-padding: 10;">
+            <Button text="Log In" onAction="#handleSuccessfulLogin" style="-fx-background-color: #a8d5a8; -fx-text-fill: #ffffff; -fx-font-size: 17; -fx-background-radius: 10; -fx-padding: 10;">
             </Button>
             <Button text="Go Back" onAction="#handleLeaveLogIn" style="-fx-background-color: transparent; -fx-text-fill: #88c488; -fx-font-size: 14; -fx-underline: true;">
             </Button>
