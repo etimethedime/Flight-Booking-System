@@ -5,16 +5,16 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.flightbooking.openSceneController" style="-fx-background-color: linear-gradient(to bottom, #cce7ff, #e6ffee);">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" style="-fx-background-color: linear-gradient(to bottom, #cce7ff, #e6ffee);" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.flightbooking.openSceneController">
    <children>
-      <Text layoutX="280.0" layoutY="300.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome To CME Bookings" style="-fx-fill: #7cc47c;">
+      <Text layoutX="280.0" layoutY="300.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #7cc47c;" text="Welcome To CME Bookings">
          <font>
             <Font name="Sans-Serif Bold" size="32.0" />
          </font>
       </Text>
-      <Button layoutX="370.0" layoutY="400.0" mnemonicParsing="false" onAction="#handleLogInButtonClick" prefHeight="45.0" prefWidth="110.0" text="Log In" style="-fx-background-color: #a8d5a8; -fx-text-fill: #ffffff; -fx-font-size: 17; -fx-background-radius: 10;">
+      <Button layoutX="370.0" layoutY="400.0" mnemonicParsing="false" onAction="#handleLogInButtonClick" prefHeight="45.0" prefWidth="110.0" style="-fx-background-color: #a8d5a8; -fx-text-fill: #ffffff; -fx-font-size: 17; -fx-background-radius: 10;" text="Log In">
       </Button>
-      <Button layoutX="520.0" layoutY="400.0" mnemonicParsing="false" onAction="#handleRegisterButtonClick" prefHeight="45.0" prefWidth="110.0" text="Register" style="-fx-background-color: #88c488; -fx-text-fill: #ffffff; -fx-font-size: 17; -fx-background-radius: 10;">
+      <Button layoutX="520.0" layoutY="400.0" mnemonicParsing="false" onAction="#handleRegisterButtonClick" prefHeight="45.0" prefWidth="110.0" style="-fx-background-color: #88c488; -fx-text-fill: #ffffff; -fx-font-size: 17; -fx-background-radius: 10;" text="Register">
       </Button>
    </children>
 </AnchorPane>
