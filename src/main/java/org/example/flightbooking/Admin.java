@@ -28,14 +28,9 @@ public class Admin extends Account implements AdminDBQ{
     }
 
     @Override
-    public static String register(String Username, String Password, String FirstName, String LastName, String Email,
-                                  String Address, String SSN, String SecurityQuestion, String SecurityAnswer) throws SQLException {
-        // Validate input fields
-        String validationError = validateRegistrationInput(Username, Password, FirstName, LastName, Email, Address, SSN, SecurityQuestion, SecurityAnswer);
-        if (validationError != null) {
-            return "Registration failed: " + validationError;
-        }
-
+    public void register(String Username, String Password, String FirstName, String LastName, String Email,
+                         String PhoneNumber, String Street, String Zipcode, String State, String City, String SSN,
+                         String SecurityQuestion, String SecurityAnswer) throws SQLException {
         try (Connection connection = getConnection()) {
             PreparedStatement registerPs = connection.prepareStatement(Queries.REGISTER);
 
@@ -45,17 +40,19 @@ public class Admin extends Account implements AdminDBQ{
             registerPs.setString(3, FirstName);
             registerPs.setString(4, LastName);
             registerPs.setString(5, Email);
-            registerPs.setString(6, Address);
-            registerPs.setString(7, SSN);
-            registerPs.setString(8, SecurityQuestion);
-            registerPs.setString(9, SecurityAnswer);
+            registerPs.setString(6, PhoneNumber);
+            registerPs.setString(7, Street);
+            registerPs.setString(8, Zipcode);
+            registerPs.setString(9, State);
+            registerPs.setString(10, City);
+            registerPs.setString(11, SSN);
+            registerPs.setString(12, SecurityQuestion);
+            registerPs.setString(13, SecurityAnswer);
 
             // Execute the statement
             registerPs.executeUpdate();
-            return "User registered successfully.";
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return "Registration failed: Database error.";
+            System.out.println("User registered successfully.");
+            connection.close();
         }
     }
     @Override
