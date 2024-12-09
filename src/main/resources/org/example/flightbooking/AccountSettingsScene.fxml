@@ -17,5 +17,7 @@
                 <Button mnemonicParsing="false" onAction="#handleUpdateInformation" prefHeight="45.0" prefWidth="200.0" text="Log Out" style="-fx-background-color: #8fdf8f; -fx-text-fill: #ffffff; -fx-font-size: 17; -fx-background-radius: 10;" />
             </children>
         </VBox>
+
+        <Button mnemonicParsing="false" onAction="#handleGoBackToMainPage" layoutX="400.0" layoutY="700.0" prefHeight="35.0" prefWidth="150.0" text="Go Back to Main Page" style="-fx-background-color: #7ecb7e; -fx-text-fill: #ffffff; -fx-font-size: 14; -fx-background-radius: 10;" />
     </children>
 </AnchorPane>
