@@ -1,13 +1,12 @@
 package org.example.flightbooking;
 
-import java.beans.Customizer;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class Customer extends Account implements CustomerDBQ {
-    public Customer (String firstName, String lastName, String street,
+public abstract class Customer extends Account implements CustomerDBQ {
+    /*public Customer (String firstName, String lastName, String street,
                      String zipCode, String state, String username,
                     String password, String email, String SSN,
                      String secQuestion, String secAnswer, String secPIN) {
@@ -18,6 +17,10 @@ public class Customer extends Account implements CustomerDBQ {
                 secQuestion, secAnswer, secPIN);
     }
 
+     */
+    public Customer(){
+
+    }
     public Connection getConnection() throws SQLException {
         Connection connection = DriverManager.getConnection(
                 "jdbc:mysql://cis32702024.mysql.database.azure.com:3306/cosmas",
@@ -26,10 +29,9 @@ public class Customer extends Account implements CustomerDBQ {
         return connection;
     }
 
-    @Override
-    public void register(String Username, String Password, String FirstName, String LastName, String Email,
-                         String PhoneNumber, String Street, String Zipcode, String State, String City, String SSN,
-                         String SecurityQuestion, String SecurityAnswer) throws SQLException {
+
+    public void register(String Username, String Password, String FirstName, String LastName, String Email
+            , String Address, String SSN, String SecurityQuestion, String SecurityAnswer) throws SQLException {
         try (Connection connection = getConnection()) {
             PreparedStatement registerPs = connection.prepareStatement(Queries.REGISTER);
 
@@ -39,14 +41,10 @@ public class Customer extends Account implements CustomerDBQ {
             registerPs.setString(3, FirstName);
             registerPs.setString(4, LastName);
             registerPs.setString(5, Email);
-            registerPs.setString(6, PhoneNumber);
-            registerPs.setString(7, Street);
-            registerPs.setString(8, Zipcode);
-            registerPs.setString(9, State);
-            registerPs.setString(10, City);
-            registerPs.setString(11, SSN);
-            registerPs.setString(12, SecurityQuestion);
-            registerPs.setString(13, SecurityAnswer);
+            registerPs.setString(6, Address);
+            registerPs.setString(7, SSN);
+            registerPs.setString(8, SecurityQuestion);
+            registerPs.setString(9, SecurityAnswer);
 
             // Execute the statement
             registerPs.executeUpdate();

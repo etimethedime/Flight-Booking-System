@@ -3,7 +3,9 @@ package org.example.flightbooking;
 import java.util.Scanner;
 
 public class Runner {
-    //for laughs and giggles
+
+}
+   /* //for laughs and giggles
     public static void main(String[] args) {
         String firstName;
         String lastName;
@@ -138,3 +140,5 @@ public class Runner {
     }
 
 }
+
+ */

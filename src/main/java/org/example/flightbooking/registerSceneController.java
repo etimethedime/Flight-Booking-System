@@ -8,6 +8,7 @@ import javafx.event.ActionEvent;
 
 import java.awt.*;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Objects;
 
 public class registerSceneController {
@@ -15,16 +16,15 @@ public class registerSceneController {
     private TextField query = new TextField();
     private TextField firstName = new TextField();
     private TextField lastName = new TextField();
-    private TextField street = new TextField();
-    private TextField zipCode = new TextField();
-    private TextField state =  new TextField();
+    private TextField address = new TextField();
+
     private TextField username =  new TextField();
     private TextField password =  new TextField();
     private TextField email =  new TextField();
     private TextField SSN = new TextField();
     private TextField  secQuestion =  new TextField();
     private TextField secAnswer = new TextField();
-    private TextField secPIN =  new TextField();
+
     public Stage window;
     public Scene openScene;
     public Parent openSceneRoot;
@@ -34,25 +34,30 @@ public class registerSceneController {
     public Parent logInRoot;
 
 
-    public void Register(){
+    public void Register() throws SQLException {
         String s = query.getText();
         String firstName = this.firstName.getText();
         String lastName = this.lastName.getText();
-        String street = this.street.getText();
-        String zipCode = this.zipCode.getText();
-        String state = this.state.getText();
         String username = this.username.getText();
         String password = this.password.getText();
+        String address = this.address.getText();
         String email = this.email.getText();
         String SSN = this.SSN.getText();
         String secQuestion = this.secQuestion.getText();
         String secAnswer = this.secAnswer.getText();
-        String secPIN = this.secPIN.getText();
 
-        Customer customer = new Customer(firstName,lastName,street,zipCode,state,username,password,email,SSN,secQuestion, secAnswer, secPIN);
+
+
+
+
+
+
+        //Customer customer = new Customer();
+        //customer.register(username,password,firstName,lastName,email,address,SSN,secQuestion,secAnswer);
+
         //customer class should have method to add newly registered user into database
     }
-    public void handleRegister (ActionEvent event) throws IOException{
+    public void handleRegister (ActionEvent event) throws IOException, SQLException {
         Register();
         System.out.println("Account created!");
     }
