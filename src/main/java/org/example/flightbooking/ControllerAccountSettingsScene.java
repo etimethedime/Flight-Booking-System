@@ -18,10 +18,6 @@ public class ControllerAccountSettingsScene {
     public Scene AvailableFlightsScene;
     public Stage window;
 
-
-
-
-
     public void accountUpdateInformationSceneClick(ActionEvent event) throws Exception{
         AccountUpdateSceneRoot = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("AccountUpdateScene.fxml")));
         window = (Stage) ((Node)event.getSource()).getScene().getWindow();

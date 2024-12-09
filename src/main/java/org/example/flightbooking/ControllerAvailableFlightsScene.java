@@ -16,13 +16,13 @@ import java.util.Objects;
 
 public class ControllerAvailableFlightsScene {
 
-    private Parent openSceneRoot;
+    public Parent openSceneRoot;
     public Parent MyFlightsRoot;
-    private Parent AccountSettingsRoot;
-    private Scene openScene;
+    public Parent AccountSettingsRoot;
+    public Scene openScene;
     public Scene MyFlightScene;
-    private Scene AccountSettingsScene;
-    private Stage window;
+    public Scene AccountSettingsScene;
+    public Stage window;
 
 
     @FXML
@@ -52,16 +52,15 @@ public class ControllerAvailableFlightsScene {
     }
 
     public void handleMyFlightsSceneClick(ActionEvent event)throws Exception{
-        MyFlightsRoot = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("MyFlights.fxml")));
+        MyFlightsRoot = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("MyFlightsScene.fxml")));
         window = (Stage) ((Node)event.getSource()).getScene().getWindow();
         MyFlightScene = new Scene(MyFlightsRoot);
         window.setScene(MyFlightScene);
         window.show();
     }
 
-    @FXML
-    private void handleAccountSettingsButtonClick(ActionEvent event) throws Exception {
-        AccountSettingsRoot = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("AccountSettingsScene.fxml")));
+    public void handleAccountSettingsButtonClick(ActionEvent event) throws Exception {
+        AccountSettingsRoot = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("AccountSettingScene.fxml")));
         window = (Stage) ((Node)event.getSource()).getScene().getWindow();
         AccountSettingsScene = new Scene(AccountSettingsRoot);
         window.setScene(AccountSettingsScene);
