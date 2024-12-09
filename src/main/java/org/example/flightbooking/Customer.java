@@ -5,23 +5,14 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+import static org.example.flightbooking.ExceptionHandler.validateRegistrationInput;
+
 public abstract class Customer extends Account implements CustomerDBQ {
-    /*public Customer (String firstName, String lastName, String street,
-                     String zipCode, String state, String username,
-                    String password, String email, String SSN,
-                     String secQuestion, String secAnswer, String secPIN) {
 
-        super(firstName, lastName, street,
-                zipCode, state, username,
-                password, email, SSN,
-                secQuestion, secAnswer, secPIN);
-    }
-
-     */
     public Customer(){
 
     }
-    public Connection getConnection() throws SQLException {
+    public static Connection getConnection() throws SQLException {
         Connection connection = DriverManager.getConnection(
                 "jdbc:mysql://cis32702024.mysql.database.azure.com:3306/cosmas",
                 "ezradegafe1", "GSUproject123");
@@ -30,8 +21,14 @@ public abstract class Customer extends Account implements CustomerDBQ {
     }
 
 
-    public void register(String Username, String Password, String FirstName, String LastName, String Email
-            , String Address, String SSN, String SecurityQuestion, String SecurityAnswer) throws SQLException {
+    public static String register(String Username, String Password, String FirstName, String LastName, String Email,
+                                  String Address, String SSN, String SecurityQuestion, String SecurityAnswer) throws SQLException {
+        // Validate input fields
+        String validationError = validateRegistrationInput(Username, Password, FirstName, LastName, Email, Address, SSN, SecurityQuestion, SecurityAnswer);
+        if (validationError != null) {
+            return "Registration failed: " + validationError;
+        }
+
         try (Connection connection = getConnection()) {
             PreparedStatement registerPs = connection.prepareStatement(Queries.REGISTER);
 
@@ -48,10 +45,13 @@ public abstract class Customer extends Account implements CustomerDBQ {
 
             // Execute the statement
             registerPs.executeUpdate();
-            System.out.println("User registered successfully.");
-            connection.close();
+            return "User registered successfully.";
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return "Registration failed: Database error.";
         }
     }
+
     @Override
     public void logIn(String Username, String Password) throws SQLException {
         try (Connection connection = getConnection()) {
