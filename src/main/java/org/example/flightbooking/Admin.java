@@ -5,7 +5,10 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class Admin extends Account implements AdminDBQ{
+import static org.example.flightbooking.ExceptionHandler.AdminValidateRegistrationInput;
+import static org.example.flightbooking.ExceptionHandler.validateRegistrationInput;
+
+public abstract class Admin extends Account implements AdminDBQ{
 
     /*
     public Admin (String firstName, String lastName, String street, String zipCode, String state, String username,
@@ -19,7 +22,7 @@ public class Admin extends Account implements AdminDBQ{
 
     }
 
-    public Connection getConnection() throws SQLException {
+    public static Connection getConnection() throws SQLException {
         Connection connection = DriverManager.getConnection(
                 "jdbc:mysql://cis32702024.mysql.database.azure.com:3306/cosmas",
                 "ezradegafe1", "GSUproject123");
@@ -28,30 +31,31 @@ public class Admin extends Account implements AdminDBQ{
     }
 
     @Override
-    public void register(String Username, String Password, String FirstName, String LastName, String Email,
-                         String PhoneNumber, String Street, String Zipcode, String State, String City, String SSN,
-                         String SecurityQuestion, String SecurityAnswer) throws SQLException {
+    public String register(String employeeId, String username, String password,
+                                  String firstName, String lastName) throws SQLException {
+        // Validate input fields
+        String validationError = AdminValidateRegistrationInput(employeeId,username,password,firstName,lastName);
+        if (validationError != null) {
+            return "Registration failed: " + validationError;
+        }
+
         try (Connection connection = getConnection()) {
             PreparedStatement registerPs = connection.prepareStatement(Queries.REGISTER);
 
             // Set parameters for the PreparedStatement
-            registerPs.setString(1, Username);
-            registerPs.setString(2, Password);
-            registerPs.setString(3, FirstName);
-            registerPs.setString(4, LastName);
-            registerPs.setString(5, Email);
-            registerPs.setString(6, PhoneNumber);
-            registerPs.setString(7, Street);
-            registerPs.setString(8, Zipcode);
-            registerPs.setString(9, State);
-            registerPs.setString(10, City);
-            registerPs.setString(11, SSN);
-            registerPs.setString(12, SecurityQuestion);
-            registerPs.setString(13, SecurityAnswer);
+            registerPs.setString(1, employeeId);
+            registerPs.setString(2, username);
+            registerPs.setString(3, password);
+            registerPs.setString(4, firstName);
+            registerPs.setString(5, lastName);
+
 
             // Execute the statement
             registerPs.executeUpdate();
-            System.out.println("User registered successfully.");
+            return "User registered successfully.";
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return "Registration failed: Database error.";
         }
     }
     @Override

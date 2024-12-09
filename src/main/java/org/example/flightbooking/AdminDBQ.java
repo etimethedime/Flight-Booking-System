@@ -6,9 +6,7 @@ public abstract interface AdminDBQ {
 
     //this will hold all the queries to get data from the database
 
-    public abstract void register(String Username, String Password, String FirstName, String LastName, String Email,
-                                  String PhoneNumber, String Street, String Zipcode, String State, String City, String SSN,
-                                  String SecurityQuestion, String SecurityAnswer) throws SQLException; // should get registration information and add a new customer using INSERT
+    public abstract String register(String employeeId, String username, String password, String firstName, String lastName) throws SQLException; // should get registration information and add a new customer using INSERT
     public abstract void logIn(String Username, String Password) throws SQLException; // should get username and password using SELECT Query
     public abstract void retrievePassword(String Username, String SecurityQuestion, String SecurityAnswer) throws SQLException; // should get password using SELECT query
     public abstract void changePassword(String Password, String Username) throws SQLException; // should change password with new password using UPDATE query

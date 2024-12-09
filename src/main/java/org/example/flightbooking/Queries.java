@@ -18,6 +18,8 @@ public class Queries {
     public static final String CHANGEFLIGHT = "UPDATE FLIGHTS SET Departure_Time = ?, Arrival_Time = ?, Terminal = ? WHERE Flight_ID = ?"; // UPDATE
     public static final String DELETEFLIGHT = "DELETE FROM FLIGHTS WHERE Flight_ID = ?"; //DELETE
 
+            // For Admins
+    public static final String ADMINREGISTER = "INSERT INTO ADMIN (Employee_ID, Username, Password, First_Name, Last_Name) VALUES (?, ?, ?, ?, ?);"; // INSERT
 
 
 
