@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Objects;
 
-public class registerSceneController {
+public class ControllerRegisterScene {
 
     private TextField query = new TextField();
     private TextField firstName = new TextField();
