@@ -10,19 +10,24 @@ import javafx.stage.Stage;
 import java.util.Objects;
 
 
-public class AccountSettingsSceneController {
+public class ControllerAccountSettingsScene {
 
     public Parent AvailableFLightsRoot;
+    public Parent AccountUpdateSceneRoot;
+    public Scene AccountUpdateScene;
     public Scene AvailableFlightsScene;
     public Stage window;
 
-    public void handleChangePassword(ActionEvent event) {
-    }
 
-    public void handleUpdateEmail(ActionEvent event) {
-    }
 
-    public void handleUpdateInformation(ActionEvent event) {
+
+
+    public void accountUpdateInformationSceneClick(ActionEvent event) throws Exception{
+        AccountUpdateSceneRoot = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("AccountUpdateScene.fxml")));
+        window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        AccountUpdateScene = new Scene(AccountUpdateSceneRoot);
+        window.setScene(AccountUpdateScene);
+        window.show();
     }
 
     public void handleGoBackToMainPage(ActionEvent event) throws Exception {
@@ -32,4 +37,6 @@ public class AccountSettingsSceneController {
         window.setScene(AvailableFlightsScene);
         window.show();
     }
+
+
 }

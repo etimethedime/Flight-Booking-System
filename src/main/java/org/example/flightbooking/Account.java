@@ -15,6 +15,7 @@ public class Account {
     private String currentFlight;
     private String secPIN;
 
+
     public Account (String firstName, String lastName, String street, String zipCode, String state, String username,
                     String password, String email, String SSN, String secQuestion, String secAnswer, String secPIN) {
         this.firstName = firstName;
@@ -32,6 +33,7 @@ public class Account {
         this.secPIN = secPIN;
         //have a Scanner in the main file bascially asking to set these.
     }
+
 
     public String getUsername() {
         return username;

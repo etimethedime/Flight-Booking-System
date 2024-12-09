@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class Customer extends Account implements CustomerDBQ {
+
     public Customer (String firstName, String lastName, String street,
                      String zipCode, String state, String username,
                     String password, String email, String SSN,

@@ -12,16 +12,18 @@ import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-import java.io.IOException;
 import java.util.Objects;
 
-public class AvailableFlightsSceneController {
+public class ControllerAvailableFlightsScene {
 
     private Parent openSceneRoot;
+    public Parent MyFlightsRoot;
     private Parent AccountSettingsRoot;
-    private Scene AccountSettingsScene;
     private Scene openScene;
+    public Scene MyFlightScene;
+    private Scene AccountSettingsScene;
     private Stage window;
+
 
     @FXML
     private VBox hiddenPane;
@@ -49,9 +51,12 @@ public class AvailableFlightsSceneController {
         transition.play();
     }
 
-    @FXML
-    private void handleMyFlightsButtonClick() {
-        System.out.println("My Flights clicked");
+    public void handleMyFlightsSceneClick(ActionEvent event)throws Exception{
+        MyFlightsRoot = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("MyFlights.fxml")));
+        window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        MyFlightScene = new Scene(MyFlightsRoot);
+        window.setScene(MyFlightScene);
+        window.show();
     }
 
     @FXML

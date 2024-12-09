@@ -6,12 +6,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
-import javafx.stage.Window;
 
 import java.io.IOException;
 import java.util.Objects;
 
-public class logInSceneController {
+public class ControllerLogInScene {
 
     public Stage window;
     public Scene openScene;

@@ -10,7 +10,7 @@ import java.awt.*;
 import java.io.IOException;
 import java.util.Objects;
 
-public class registerSceneController {
+public class ControllerRegisterScene {
 
     private TextField query = new TextField();
     private TextField firstName = new TextField();
@@ -47,7 +47,6 @@ public class registerSceneController {
         String secAnswer = this.secAnswer.getText();
         String secPIN = this.secPIN.getText();
 
-        //Customer customer = new Customer(firstName,lastName,street,zipCode,state,username,password,email,SSN,secQuestion, secAnswer, secPIN);
         //customer class should have method to add newly registered user into database
 
         AvailableFlightsRoot = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("AvaialableFlightsScene.fxml")));
@@ -55,6 +54,8 @@ public class registerSceneController {
         AvailableFlightsScene = new Scene(AvailableFlightsRoot);
         window.setScene(AvailableFlightsScene);
         window.show();
+
+
 
     }
 
