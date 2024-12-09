@@ -52,7 +52,6 @@ public class Admin extends Account implements AdminDBQ{
             // Execute the statement
             registerPs.executeUpdate();
             System.out.println("User registered successfully.");
-            connection.close();
         }
     }
     @Override
