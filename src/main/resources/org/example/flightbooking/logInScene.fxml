@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.flightbooking.logInSceneController" style="-fx-background-color: linear-gradient(to bottom, #cce7ff, #e6ffee);">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.flightbooking.ControllerLogInScene" style="-fx-background-color: linear-gradient(to bottom, #cce7ff, #e6ffee);">
     <children>
         <VBox alignment="CENTER" spacing="20.0" style="-fx-padding: 40;" AnchorPane.topAnchor="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
             <TextField promptText="Username" style="-fx-background-color: #f4f4f4; -fx-prompt-text-fill: #7cc47c; -fx-font-size: 16; -fx-background-radius: 10; -fx-padding: 10;" prefWidth="250.0" maxWidth="250.0" minWidth="250.0">

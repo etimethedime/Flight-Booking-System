@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Objects;
 
-public class openSceneController {
+public class ControllerOpenScene {
     public Stage window;
     public Scene logInScene;
     public Parent logInRoot;
