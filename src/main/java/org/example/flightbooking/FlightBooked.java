@@ -11,8 +11,8 @@ public class FlightBooked {
     String ArrivalTime;
     String Seat;
 
-    public FlightBooked(String Username, String FlightId, String DepartureCity,String ArrivalCity, String DepartureTime, String ArrivalTime, String Seat){
-        this.Username = new String(Username);
+    public FlightBooked(String BookingID, String FlightId, String DepartureCity,String ArrivalCity, String DepartureTime, String ArrivalTime, String Seat){
+        this.BookingID = new String(BookingID);
         this.FlightID = new String(FlightId);
         this.DepartureCity = new String(DepartureCity);
         this.ArrivalCity = new String(ArrivalCity);
