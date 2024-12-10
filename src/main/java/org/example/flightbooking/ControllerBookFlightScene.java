@@ -38,7 +38,8 @@ public class ControllerBookFlightScene {
     private void handleBookButtonClick(ActionEvent event) throws Exception {
         System.out.println(
                 ControllerLogInScene.c1.bookFlight(ControllerLogInScene.c1.getUser(),
-                        selectedFlight.getFlightID(), selectedFlight.getSeat()));
+                        selectedFlight.getFlightID(),selectedFlight.getSeat(),selectedFlight.getDepartureCity(),selectedFlight.getArrivalCity(),
+                        selectedFlight.getDepartureTime(),selectedFlight.getArrivalTime()));
     }
 
     @FXML
