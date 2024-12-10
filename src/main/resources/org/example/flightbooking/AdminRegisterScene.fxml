@@ -83,15 +83,21 @@
          <RowConstraints />
         </rowConstraints>
     </GridPane>
-   <Text fontSmoothingType="LCD" layoutX="337.0" layoutY="703.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #7cc47c;" text="Are you customer?" wrappingWidth="177.4058837890625">
-      <font>
-         <Font size="15.0" />
-      </font>
-   </Text>
-   <Button layoutX="477.0" layoutY="685.0" mnemonicParsing="false" onAction="#handleCustomerRegisterButtonClick" prefHeight="25.0" prefWidth="141.0" style="-fx-background-color: transparent; -fx-text-fill: #88c488; -fx-font-size: 14; -fx-underline: true;" text="Customer Register">
-      <padding>
-         <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
-      </padding>
-   </Button>
+   <HBox alignment="CENTER" layoutX="316.0" layoutY="680.0" prefHeight="31.0" prefWidth="330.0" spacing="10.0">
+      <children>
+         <Region />
+         <Text fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #7cc47c;" text="Are you customer?" wrappingWidth="177.4058837890625">
+            <font>
+               <Font size="15.0" />
+            </font>
+         </Text>
+         <Button mnemonicParsing="false" onAction="#handleCustomerRegisterButtonClick" prefHeight="25.0" prefWidth="141.0" style="-fx-background-color: transparent; -fx-text-fill: #88c488; -fx-font-size: 14; -fx-underline: true;" text="Customer Register">
+            <padding>
+               <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+            </padding>
+         </Button>
+         <Region />
+      </children>
+   </HBox>
 
 </AnchorPane>
