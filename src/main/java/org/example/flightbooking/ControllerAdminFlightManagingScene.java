@@ -67,4 +67,17 @@ public class ControllerAdminFlightManagingScene {
         tableView.refresh();
         System.out.println(list.toString());
     }
+
+    @FXML
+    private void handleDeleteFlightFromDatabase(ActionEvent event)throws SQLException{
+
+    }
+    @FXML
+    private void handleUpdateFlightFromDatabase(ActionEvent event)throws SQLException{
+
+    }
+    @FXML
+    private void handleInsertFlightFromDatabase(ActionEvent event)throws SQLException{
+
+    }
 }
