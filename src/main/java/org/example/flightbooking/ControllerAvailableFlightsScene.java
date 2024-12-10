@@ -1,17 +1,25 @@
 package org.example.flightbooking;
 
 import javafx.animation.TranslateTransition;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Objects;
 
 public class ControllerAvailableFlightsScene {
@@ -35,6 +43,23 @@ public class ControllerAvailableFlightsScene {
     private Button accountSettingsButton;
     @FXML
     private Button signOffButton;
+    private TableView<Flight> tableView;
+
+    @FXML
+    private TableColumn<Flight, String> FlightIDCol;
+
+    @FXML
+    private TableColumn<Flight, String> FlightNumberCol;
+    @FXML
+    private TableColumn<Flight, String> DepartureCityCol;
+    @FXML
+    private TableColumn<Flight, String> ArrivalCityCol;
+    @FXML
+    private TableColumn<Flight, String> DepartureTimeCol;
+    @FXML
+    private TableColumn<Flight, String> ArrivalTimeCol;
+    @FXML
+    private TableColumn<Flight, String> TerminalCol;
 
     @FXML
     private void handleMenuButtonClick() {
@@ -75,4 +100,20 @@ public class ControllerAvailableFlightsScene {
         window.setScene(openScene);
         window.show();
     }
+
+    private void initializeFlightViewTable() throws SQLException {
+        ObservableList<Flight> list = ControllerLogInScene.c1.getAllFlights();
+        FlightIDCol.setCellValueFactory(new PropertyValueFactory<>("FlightID"));
+        FlightNumberCol.setCellValueFactory(new PropertyValueFactory<>("FlightNO"));
+        DepartureCityCol.setCellValueFactory(new PropertyValueFactory<>("DepartureCity"));
+        ArrivalCityCol.setCellValueFactory(new PropertyValueFactory<>("ArrivalCity"));
+        DepartureTimeCol.setCellValueFactory(new PropertyValueFactory<>("DepartureTime"));
+        ArrivalTimeCol.setCellValueFactory(new PropertyValueFactory<>("ArrivalTime"));
+        TerminalCol.setCellValueFactory(new PropertyValueFactory<>("Terminal"));
+
+        tableView.setItems(list);
+    }
+
+
+
 }

@@ -27,7 +27,7 @@ public class ControllerAccountSettingsScene {
     }
 
     public void handleGoBackToMainPage(ActionEvent event) throws Exception {
-        AvailableFLightsRoot = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("AvaialableFlightsScene.fxml")));
+        AvailableFLightsRoot = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("AvailableFlightsScene.fxml")));
         window = (Stage) ((Node)event.getSource()).getScene().getWindow();
         AvailableFlightsScene = new Scene(AvailableFLightsRoot);
         window.setScene(AvailableFlightsScene);

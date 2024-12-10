@@ -17,14 +17,14 @@ public class ControllerLogInScene {
     public Scene AvailableFlightsScene;
     public Parent openSceneRoot;
     public Parent AvailableFlightsRoot;
-    public Customer c1;
-    public String user = c1.getUser();
+    public static Customer c1 = new Customer();
+    //public String user = c1.getUser();
 
     @FXML
     private void handleSuccessfulLogin(ActionEvent event) throws IOException {
         // Load the Available Flights Scene
 
-        AvailableFlightsRoot = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("AvaialableFlightsScene.fxml")));
+        AvailableFlightsRoot = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("AvailableFlightsScene.fxml")));
         window = (Stage) ((Node)event.getSource()).getScene().getWindow();
         AvailableFlightsScene = new Scene(AvailableFlightsRoot);
         window.setScene(AvailableFlightsScene);

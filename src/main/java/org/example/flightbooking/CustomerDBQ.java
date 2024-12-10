@@ -1,5 +1,7 @@
 package org.example.flightbooking;
 
+import javafx.collections.ObservableList;
+
 import java.sql.SQLException;
 
 public interface CustomerDBQ {
@@ -17,6 +19,7 @@ public interface CustomerDBQ {
 
     public String deleteFlight(String FlightID) throws SQLException; // should delete flight using DELETE query
     public String getUserFlights(String Username) throws SQLException;//
+    public ObservableList<Flight> getAllFlights () throws SQLException;
 
     }
 
