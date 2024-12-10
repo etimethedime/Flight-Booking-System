@@ -25,7 +25,7 @@ public class Admin extends Account implements AdminDBQ, CustomerDBQ{
 
     public static Connection getConnection() throws SQLException {
         Connection connection = DriverManager.getConnection(
-                "jdbc:mysql://cis32702024.mysql.database.azure.com:3306/cosmas",
+                "jdbc:mysql://cis32702024.mysql.database.azure.com:3306/flightbooker",
                 "ezradegafe1", "GSUproject123");
         System.out.println("Database connected");
         return connection;
@@ -53,6 +53,7 @@ public class Admin extends Account implements AdminDBQ, CustomerDBQ{
 
             // Execute the statement
             registerPs.executeUpdate();
+            setUser(username);
             return "User registered successfully.";
         } catch (SQLException e) {
             e.printStackTrace();

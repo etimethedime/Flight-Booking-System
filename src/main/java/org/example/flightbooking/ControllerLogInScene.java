@@ -60,7 +60,7 @@ public class ControllerLogInScene {
     @FXML
     private void handleSuccessfulLogin(ActionEvent event) throws IOException, SQLException {
         errorMessage.setText("");
-        switch(UserCase) {
+        switch(selectMode()) {
             case 1:
                 if (c1.logIn(username.getText(), password.getText())) {
                     c1.setUser(username.getText());
