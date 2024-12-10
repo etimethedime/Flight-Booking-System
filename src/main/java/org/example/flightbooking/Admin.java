@@ -32,10 +32,10 @@ public class Admin extends Account implements AdminDBQ, CustomerDBQ{
     }
 
     @Override
-    public String adminRegister(String employeeId, String username, String password,
+    public String adminRegister(String employeeId, String username, String password, String confirmPassword,
                                   String firstName, String lastName) throws SQLException {
         // Validate input fields
-        String validationError = adminValidateRegistrationInput(employeeId, username, password, firstName, lastName);
+        String validationError = adminValidateRegistrationInput(employeeId, username, password, confirmPassword, firstName, lastName);
         if (validationError != null) {
             return "Registration failed: " + validationError;
         }

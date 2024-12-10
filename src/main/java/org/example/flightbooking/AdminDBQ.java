@@ -6,7 +6,7 @@ public interface AdminDBQ {
 
     //this will hold all the queries to get data from the database
 
-    public String adminRegister(String employeeId, String username, String password,
+    public String adminRegister(String employeeId, String username, String password, String confirmPassword,
                                     String firstName, String lastName) throws SQLException; // should get registration information and add a new customer using INSERT
     public boolean adminLogIn(String Username, String Password) throws SQLException; // should get username and password using SELECT Query
 
