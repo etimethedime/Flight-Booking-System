@@ -1,4 +1,5 @@
 package org.example.flightbooking;
+import javafx.animation.TranslateTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -10,6 +11,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -55,6 +57,7 @@ public class ControllerAdminFlightManagingScene {
         seatOptionComboBox.setItems(seatOptions);
     }
 
+
     public void initializeFlightViewTable() throws SQLException {
         ObservableList<Flight> list = ControllerLogInScene.c1.getAllFlights();
         FlightIDCol.setCellValueFactory(new PropertyValueFactory<>("FlightID"));
@@ -72,8 +75,6 @@ public class ControllerAdminFlightManagingScene {
 
     @FXML
     private void handleDeleteFlightFromDatabase(ActionEvent event)throws SQLException{
-        selectedFlight = adminGetSelectedFlight();
-        ControllerLogInScene.a1.adminDeleteFlight(ControllerLogInScene.a1.adminDeleteFlight(selectedFlight.FlightID));
 
     }
     @FXML
