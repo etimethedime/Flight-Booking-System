@@ -17,8 +17,7 @@
                 <Font name="Sans-Serif" size="20.0" />
             </font>
         </Text>
-        <Button layoutX="399.0" layoutY="526.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="202.0" style="-fx-background-color: #88c488; -fx-text-fill: #ffffff; -fx-font-size: 17; -fx-background-radius: 10;" text="Confirm and Book ">
-        </Button>
+        <Button layoutX="399.0" layoutY="526.0" mnemonicParsing="false" onAction="#handleBookButtonClick" prefHeight="46.0" prefWidth="202.0" style="-fx-background-color: #88c488; -fx-text-fill: #ffffff; -fx-font-size: 17; -fx-background-radius: 10;" text="Confirm and Book "/>
       <Button layoutX="453.0" layoutY="607.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="94.0" style="-fx-background-color: #88c488; -fx-text-fill: #ffffff; -fx-font-size: 17; -fx-background-radius: 10;" text="Go Back" />
     </children>
 </AnchorPane>

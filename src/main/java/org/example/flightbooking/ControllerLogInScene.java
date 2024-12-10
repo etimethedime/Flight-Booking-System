@@ -22,15 +22,13 @@ public class ControllerLogInScene {
 
     @FXML
     private void handleSuccessfulLogin(ActionEvent event) throws IOException, SQLException {
-        // Load the Available Flights Scene
 
         AvailableFlightsRoot = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("AvailableFlightsScene.fxml")));
         window = (Stage) ((Node)event.getSource()).getScene().getWindow();
         AvailableFlightsScene = new Scene(AvailableFlightsRoot);
         window.setScene(AvailableFlightsScene);
         window.show();
-        // call customer class method to log in using SELECT QUERY
-        // upon successful login, user is taken to next scene
+
 
     }
     public void handleLeaveLogIn(ActionEvent event) throws IOException {
