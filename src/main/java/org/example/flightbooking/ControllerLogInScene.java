@@ -8,7 +8,6 @@ import javafx.scene.Scene;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
-
 import javafx.scene.control.TextField;
 import java.io.IOException;
 import java.sql.SQLException;
