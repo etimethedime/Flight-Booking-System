@@ -10,6 +10,8 @@ public class Flight {
     String ArrivalTime;
     String Terminal;
 
+    String Seat = "not selected";
+
     public Flight(String FlightId, String FlightNumber, String DepartureCity, String ArrivalCity,String DepartureTime, String ArrivalTime, String Terminal){
         this.FlightID = new String(FlightId);
         this.FlightNO = new String(FlightNumber);
@@ -46,5 +48,13 @@ public class Flight {
 
     public String getTerminal() {
         return Terminal;
+    }
+
+    public void setSeat(String seat) {
+        Seat = seat;
+    }
+
+    public String getSeat() {
+        return Seat;
     }
 }

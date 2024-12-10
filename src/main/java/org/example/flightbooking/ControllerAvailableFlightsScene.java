@@ -142,6 +142,9 @@ public class ControllerAvailableFlightsScene {
     private void handleBookFlightButton(ActionEvent event) throws Exception{
 
         selectedFlight = getSelectedFlight();
+        if(seatOptionComboBox.getSelectionModel().getSelectedItem() != null){
+           selectedFlight.setSeat(seatOptionComboBox.getSelectionModel().getSelectedItem());
+        }
         BookFlightVerrificationRoot = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("BookFlightVerificationScene.fxml")));
         window = (Stage) ((Node)event.getSource()).getScene().getWindow();
         BookFlightVerrificationScene = new Scene(BookFlightVerrificationRoot);

@@ -21,12 +21,12 @@ public class ControllerBookFlightScene {
         flightinfo.append("Takeoff = " + selectedFlight.getDepartureTime() + "\n");
         flightinfo.append("Arrive = " + selectedFlight.getArrivalTime() + "\n");
         flightinfo.append("Gate = " + selectedFlight.getTerminal() + "\n");
+        flightinfo.append("Seat Selection = " + selectedFlight.getSeat() + "\n");
         bookingInformation.setText(flightinfo.toString());
     }
     @FXML
     public void handleBook(ActionEvent event)throws SQLException{
-        ControllerLogInScene.c1.bookFlight(ControllerLogInScene.c1.getUser(), selectedFlight.getFlightID(),"1");
-
+        ControllerLogInScene.c1.bookFlight(ControllerLogInScene.c1.getUser(), selectedFlight.getFlightID(),selectedFlight.getSeat());
         /*
         BookFlightVerrificationRoot = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("AvailableFlightScene.fxml")));
         window = (Stage) ((Node)event.getSource()).getScene().getWindow();
