@@ -14,26 +14,7 @@ public class Account {
     private String secAnswer;
     private String currentFlight;
     private String secPIN;
-/*
-    public Account (String firstName, String lastName, String street, String zipCode, String state, String username,
-                    String password, String email, String SSN, String secQuestion, String secAnswer, String secPIN) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.street = street;
-        this.zipCode = zipCode;
-        this.state = state;
-        this.username = username;
-        this.password = password;
-        this.email = email;
-        this.SSN = SSN;
-        this.secQuestion = secQuestion;
-        this.secAnswer = secAnswer;
-        this.currentFlight = currentFlight;
-        this.secPIN = secPIN;
-        //have a Scanner in the main file bascially asking to set these.
-    }
 
- */
     public Account(){
     }
 

@@ -1,37 +1,33 @@
 package org.example.flightbooking;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 
-public abstract class Customer extends Account implements CustomerDBQ {
-    /*public Customer (String firstName, String lastName, String street,
-                     String zipCode, String state, String username,
-                    String password, String email, String SSN,
-                     String secQuestion, String secAnswer, String secPIN) {
+import static org.example.flightbooking.ExceptionHandler.validateRegistrationInput;
 
-        super(firstName, lastName, street,
-                zipCode, state, username,
-                password, email, SSN,
-                secQuestion, secAnswer, secPIN);
-    }
+public class Customer extends Account implements CustomerDBQ {
 
-     */
+    private String user;
+
     public Customer(){
 
     }
-    public Connection getConnection() throws SQLException {
+    public static Connection getConnection() throws SQLException {
         Connection connection = DriverManager.getConnection(
-                "jdbc:mysql://cis32702024.mysql.database.azure.com:3306/cosmas",
+                "jdbc:mysql://cis32702024.mysql.database.azure.com:3306/flightbooker",
                 "ezradegafe1", "GSUproject123");
         System.out.println("Database connected");
         return connection;
     }
 
+    @Override
+    public String register(String Username, String Password, String FirstName, String LastName, String Email,
+                                  String Address, String SSN, String SecurityQuestion, String SecurityAnswer) throws SQLException {
+        // Validate input fields
+        String validationError = validateRegistrationInput(Username, Password, FirstName, LastName, Email, Address, SSN, SecurityQuestion, SecurityAnswer);
+        if (validationError != null) {
+            return "Registration failed: " + validationError;
+        }
 
-    public void register(String Username, String Password, String FirstName, String LastName, String Email
-            , String Address, String SSN, String SecurityQuestion, String SecurityAnswer) throws SQLException {
         try (Connection connection = getConnection()) {
             PreparedStatement registerPs = connection.prepareStatement(Queries.REGISTER);
 
@@ -48,23 +44,40 @@ public abstract class Customer extends Account implements CustomerDBQ {
 
             // Execute the statement
             registerPs.executeUpdate();
-            System.out.println("User registered successfully.");
-            connection.close();
+            setUser(Username);
+            return "User registered successfully.";
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return "Registration failed: Database error.";
         }
     }
+
     @Override
-    public void logIn(String Username, String Password) throws SQLException {
+    public void logIn(String InputUsername, String InputPassword) throws SQLException {
         try (Connection connection = getConnection()) {
             PreparedStatement loginPs = connection.prepareStatement(Queries.LOGIN);
 
-            loginPs.setString(1, Username);
-            loginPs.setString(2, Password);
+            // Set parameters for the query
+            loginPs.setString(1, InputUsername);
+            loginPs.setString(2, InputPassword);
 
-            loginPs.executeUpdate();
-            System.out.println("Login successful.");
-            connection.close();
+            // Execute the query
+            ResultSet loginRs = loginPs.executeQuery();
+
+            // Validate the result
+            if (loginRs.next()) {
+                System.out.println("Login successful. Welcome, " + loginRs.getString("username") + "!");
+            } else {
+                throw new IllegalArgumentException("Login failed: Invalid username or password.");
+            }
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new SQLException("Database error occurred during login.");
         }
     }
+
     @Override
     public void retrievePassword(String Username, String SecurityQuestion, String SecurityAnswer) throws SQLException {
         try (Connection connection = getConnection()) {
@@ -80,6 +93,40 @@ public abstract class Customer extends Account implements CustomerDBQ {
             connection.close();
         }
     }
+
+    public static String getSecurityQuestion(String username) throws SQLException {
+        try (Connection connection = getConnection();
+             PreparedStatement ps = connection.prepareStatement(Queries.SELECTSECQUESTION)) {
+            ps.setString(1, username);
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                return rs.getString("SecurityQuestion");
+            } else {
+                return "Username not found.";
+            }
+        }
+    }
+
+    public static String getPassword(String username, String securityAnswer) throws SQLException {
+        try (Connection connection = getConnection();
+             PreparedStatement ps = connection.prepareStatement(Queries.SELECTPASSWORD)) {
+            ps.setString(1, username);
+            ps.setString(2, securityAnswer);
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                return rs.getString("Password");
+            } else {
+                return "Invalid username or incorrect security answer.";
+            }
+        }
+    }
+
+
+    /*
     @Override
     public void changePassword(String Password, String Username) throws SQLException {
         try (Connection connection = getConnection()) {
@@ -95,8 +142,10 @@ public abstract class Customer extends Account implements CustomerDBQ {
         }
     }
 
-    @Override
-    public void bookFlight(String Booking_ID, String Username, String Flight_ID, String Seat_Number)
+     */
+
+    //@Override
+    public String bookFlight(String Booking_ID, String Username, String Flight_ID, String Seat_Number)
             throws SQLException {
         try (Connection connection = getConnection()) {
             PreparedStatement bookFlightPs = connection.prepareStatement(Queries.BOOKFLIGHT);
@@ -107,10 +156,12 @@ public abstract class Customer extends Account implements CustomerDBQ {
             bookFlightPs.setString(4, Seat_Number);
 
             bookFlightPs.executeUpdate();
-            System.out.println("Flight Booked.");
-            connection.close();
+
+            return "Flight Booked.";
         }
     }
+
+    /*
     @Override
     public void updateFlight(String DepartureTime, String ArrivalTime, String Terminal, String FlightID)
             throws SQLException {
@@ -127,17 +178,60 @@ public abstract class Customer extends Account implements CustomerDBQ {
             connection.close();
         }
     }
-    @Override
-    public void deleteFlight(String FlightID) throws SQLException {
+
+     */
+
+    public String deleteFlight(String FlightID) throws SQLException {
         try (Connection connection = getConnection()) {
+            // Prepare SQL query for deleting a flight based on the FlightID
             PreparedStatement deleteFlightPs = connection.prepareStatement(Queries.DELETEFLIGHT);
 
+            // Set the FlightID parameter in the query
             deleteFlightPs.setString(1, FlightID);
 
-            deleteFlightPs.executeUpdate();
-            System.out.println("Flight Deleted.");
-            connection.close();
+            // Execute the deletion query
+            int rowsAffected = deleteFlightPs.executeUpdate();
+
+            // Check if the deletion was successful
+            if (rowsAffected > 0) {
+                return "Flight with ID " + FlightID + " has been deleted successfully.";
+            } else {
+                return "Flight ID not found. No flight was deleted.";
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return "An error occurred while deleting the flight.";
         }
     }
 
+    @Override
+    public String getUserFlights(String Username) throws SQLException {
+            StringBuilder allNames = new StringBuilder("All names:\n");
+
+            try (Connection connection = getConnection();
+                 PreparedStatement preparedStatement = connection.prepareStatement(Queries.USERFLIGHTS);
+                 ResultSet resultSet = preparedStatement.executeQuery()) {
+
+                while (resultSet.next()) {
+                    String firstName = resultSet.getString("firstname");
+                    String mi = resultSet.getString("mi");
+                    String lastName = resultSet.getString("lastname");
+                    allNames.append(firstName).append(" ").append(mi).append(" ").append(lastName).append("\n");
+                }
+
+                if (allNames.length() <= "All names:\n".length()) {
+                    return "No names found in the database.";
+                }
+            }
+            return allNames.toString().trim();
+        }
+
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
 }
