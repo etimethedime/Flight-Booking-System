@@ -47,6 +47,7 @@ public class ControllerMyFlightsScene {
 
     @FXML
     private TableColumn<Flight, String> SeatCol;
+    public static FlightBooked selectedFlight;
     
     public void initialize() throws SQLException {
         initializeMyFlightsViewTable();
@@ -80,6 +81,11 @@ public class ControllerMyFlightsScene {
     }
 
     public void handleDeleteFlightButton(ActionEvent event)throws Exception{
+        selectedFlight = getSelectedFlight();
+        ControllerLogInScene.c1.deleteFlight(ControllerLogInScene.c1.deleteFlight(selectedFlight.FlightID));
+    }
+    public FlightBooked getSelectedFlight(){
+        return MyFlightsView.getSelectionModel().getSelectedItem();
 
     }
 }
