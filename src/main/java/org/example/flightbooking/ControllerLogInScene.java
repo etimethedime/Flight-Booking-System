@@ -32,6 +32,8 @@ public class ControllerLogInScene {
 
         if(c1.logIn(username.getText(), password.getText())){
             c1.setUser(username.getText());
+
+
             AvailableFlightsRoot = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("AvailableFlightsScene.fxml")));
             window = (Stage) ((Node)event.getSource()).getScene().getWindow();
             AvailableFlightsScene = new Scene(AvailableFlightsRoot);

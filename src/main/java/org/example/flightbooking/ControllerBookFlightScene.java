@@ -1,5 +1,6 @@
 package org.example.flightbooking;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -7,42 +8,45 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import java.awt.event.ActionEvent;
 import java.util.Objects;
 
 public class ControllerBookFlightScene {
-    public Parent AvailableFlightsRoot;
-    public Scene AvailableFlightsScene;
-    public Stage window;
-    public Flight selectedFlight = ControllerAvailableFlightsScene.selectedFlight;
+
     @FXML
-    public Text bookingInformation= new Text();
-    public StringBuilder flightinfo = new StringBuilder();
-    public void initialize(){
-        flightinfo.append("Flight ID = " + selectedFlight.getFlightID() + "\n");
-        flightinfo.append("Flight Number = " + selectedFlight.getFlightNO() + "\n");
-        flightinfo.append("Departing From = " + selectedFlight.getDepartureCity() + "\n");
-        flightinfo.append("Flying To = " + selectedFlight.getArrivalCity() + "\n");
-        flightinfo.append("Takeoff = " + selectedFlight.getDepartureTime() + "\n");
-        flightinfo.append("Arrive = " + selectedFlight.getArrivalTime() + "\n");
-        flightinfo.append("Gate = " + selectedFlight.getTerminal() + "\n");
-        flightinfo.append("Seat Selection = " + selectedFlight.getSeat() + "\n");
-        bookingInformation.setText(flightinfo.toString());
+    private Text bookingInformation;
+
+    private Parent availableFlightsRoot;
+    private Scene availableFlightsScene;
+    private Stage window;
+
+    private final Flight selectedFlight = ControllerAvailableFlightsScene.selectedFlight;
+
+    public void initialize() {
+        StringBuilder flightInfo = new StringBuilder();
+        flightInfo.append("Flight ID = ").append(selectedFlight.getFlightID()).append("\n");
+        flightInfo.append("Flight Number = ").append(selectedFlight.getFlightNO()).append("\n");
+        flightInfo.append("Departing From = ").append(selectedFlight.getDepartureCity()).append("\n");
+        flightInfo.append("Flying To = ").append(selectedFlight.getArrivalCity()).append("\n");
+        flightInfo.append("Takeoff = ").append(selectedFlight.getDepartureTime()).append("\n");
+        flightInfo.append("Arrive = ").append(selectedFlight.getArrivalTime()).append("\n");
+        flightInfo.append("Gate = ").append(selectedFlight.getTerminal()).append("\n");
+        flightInfo.append("Seat Selection = ").append(selectedFlight.getSeat()).append("\n");
+        bookingInformation.setText(flightInfo.toString());
     }
+
     @FXML
-    public void handleGoBack(ActionEvent event)throws Exception {
-        AvailableFlightsRoot = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("openScene.fxml")));
-        window = (Stage)((Node)event.getSource()).getScene().getWindow();
-        AvailableFlightsScene = new Scene(AvailableFlightsRoot);
-        window.setScene(AvailableFlightsScene);
+    private void handleBookButtonClick(ActionEvent event) throws Exception {
+        System.out.println(
+                ControllerLogInScene.c1.bookFlight(ControllerLogInScene.c1.getUser(),
+                        selectedFlight.getFlightID(), selectedFlight.getSeat()));
+    }
+
+    @FXML
+    private void handleGoBack(ActionEvent event) throws Exception {
+        availableFlightsRoot = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("AvailableFlightsScene.fxml")));
+        window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        availableFlightsScene = new Scene(availableFlightsRoot);
+        window.setScene(availableFlightsScene);
         window.show();
     }
-
-    @FXML
-    private void handleBookButtonClick()throws Exception{
-        ControllerLogInScene.c1.bookFlight(ControllerLogInScene.c1.getUser(), selectedFlight.getFlightID(),selectedFlight.getSeat());
-    }
-
-
-
 }
