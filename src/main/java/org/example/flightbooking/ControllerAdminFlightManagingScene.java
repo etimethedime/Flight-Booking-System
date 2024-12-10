@@ -42,6 +42,8 @@ public class ControllerAdminFlightManagingScene {
     @FXML
     private ComboBox<String> seatOptionComboBox;
 
+    public static Flight selectedFlight;
+
 
     public void initialize() throws SQLException {
         initializeFlightViewTable();
@@ -70,14 +72,24 @@ public class ControllerAdminFlightManagingScene {
 
     @FXML
     private void handleDeleteFlightFromDatabase(ActionEvent event)throws SQLException{
+        selectedFlight = adminGetSelectedFlight();
+        ControllerLogInScene.a1.adminDeleteFlight(ControllerLogInScene.a1.adminDeleteFlight(selectedFlight.FlightID));
 
     }
     @FXML
     private void handleUpdateFlightFromDatabase(ActionEvent event)throws SQLException{
+        selectedFlight = adminGetSelectedFlight();
+        ControllerLogInScene.a1.adminUpdateFlight(selectedFlight.DepartureTime, selectedFlight.ArrivalTime, selectedFlight.Terminal, selectedFlight.FlightID);
 
     }
     @FXML
     private void handleInsertFlightFromDatabase(ActionEvent event)throws SQLException{
+        selectedFlight = adminGetSelectedFlight();
+        ControllerLogInScene.a1.adminInsertFlight(selectedFlight.FlightID, selectedFlight.FlightNO, selectedFlight.DepartureCity, selectedFlight.ArrivalCity, selectedFlight.DepartureTime, selectedFlight.ArrivalTime, selectedFlight.Terminal);
+    }
+
+    public Flight adminGetSelectedFlight(){
+        return tableView.getSelectionModel().getSelectedItem();
 
     }
 }

@@ -178,7 +178,7 @@ public class Admin extends Account implements AdminDBQ, CustomerDBQ{
      */
 
     @Override
-    public void adminUpdateFlight(String DepartureTime, String ArrivalTime, String Terminal, String FlightID)
+    public String adminUpdateFlight(String DepartureTime, String ArrivalTime, String Terminal, String FlightID)
             throws SQLException {
         try (Connection connection = getConnection()) {
             PreparedStatement adminUpdateFlightPs = connection.prepareStatement(Queries.ADMINCHANGEFLIGHT);
@@ -188,26 +188,61 @@ public class Admin extends Account implements AdminDBQ, CustomerDBQ{
             adminUpdateFlightPs.setString(3, Terminal);
             adminUpdateFlightPs.setString(4, FlightID);
 
-            adminUpdateFlightPs.executeUpdate();
-            System.out.println("Flight Updated.");
+            int rowsAffected = adminUpdateFlightPs.executeUpdate();
+
+            if (rowsAffected > 0) {
+                return "Flight with ID " + FlightID + " has been updated successfully.";
+            } else {
+                return "Flight ID not found. No flight was updated.";
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return "An error occurred while updating the flight.";
         }
     }
     @Override
-    public void adminDeleteFlight(String FlightID) throws SQLException {
+    public String adminDeleteFlight(String FlightID) throws SQLException {
         try (Connection connection = getConnection()) {
+            // Prepare SQL query for deleting a flight based on the FlightID
             PreparedStatement adminDeleteFlightPs = connection.prepareStatement(Queries.ADMINDELETEFLIGHT);
 
+            // Set the FlightID parameter in the query
             adminDeleteFlightPs.setString(1, FlightID);
 
-            adminDeleteFlightPs.executeUpdate();
-            System.out.println("Flight Deleted.");
-            connection.close();
+            // Execute the deletion query
+            int rowsAffected = adminDeleteFlightPs.executeUpdate();
+
+            // Check if the deletion was successful
+            if (rowsAffected > 0) {
+                return "Flight with ID " + FlightID + " has been deleted successfully.";
+            } else {
+                return "Flight ID not found. No flight was deleted.";
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return "An error occurred while deleting the flight.";
         }
     }
 
     @Override
     public String adminInsertFlight(String Flight_ID, String Flight_Number, String Departure_City, String Arrival_City, String Departure_Time, String Arrival_Time, String Terminal) throws SQLException {
-        return null;
+        try (Connection connection = getConnection()) {
+            PreparedStatement adminInsertFlightPs = connection.prepareStatement(Queries.ADMININSERTFLIGHT);
+
+            adminInsertFlightPs.setString(1, Flight_ID);
+            adminInsertFlightPs.setString(2, Flight_Number);
+            adminInsertFlightPs.setString(3, Departure_City);
+            adminInsertFlightPs.setString(4, Arrival_City);
+            adminInsertFlightPs.setString(5, Departure_Time);
+            adminInsertFlightPs.setString(6, Arrival_Time);
+            adminInsertFlightPs.setString(7, Terminal);
+
+            adminInsertFlightPs.executeUpdate();
+
+            return "Flight Booked";
+
+        }
+
     }
 
     public String getUser() {
