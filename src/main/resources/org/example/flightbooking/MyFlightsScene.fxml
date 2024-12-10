@@ -5,6 +5,7 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="800.0" prefWidth="1000.0" style="-fx-background-color: linear-gradient(to bottom, #cce7ff, #e6ffee);" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.flightbooking.ControllerMyFlightsScene">
     <children>
@@ -22,5 +23,10 @@
             </columns>
         </TableView>
       <Button layoutX="149.0" layoutY="20.0" onAction="#initializeMyFlightsViewTable" style="-fx-background-color: #88c488; -fx-text-fill: #ffffff; -fx-font-size: 14; -fx-background-radius: 10;" text="Refresh" />
+      <Button layoutX="479.0" layoutY="692.0" onAction="#handleDeleteFlightButton" prefHeight="30.0" prefWidth="124.0" style="-fx-background-color: #88c488; -fx-text-fill: #ffffff; -fx-font-size: 14; -fx-background-radius: 10;" text="Delete">
+         <font>
+            <Font size="34.0" />
+         </font>
+      </Button>
     </children>
 </AnchorPane>
