@@ -11,6 +11,9 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+
+import javax.swing.*;
+import javax.swing.table.AbstractTableModel;
 import java.sql.SQLException;
 import java.util.Objects;
 public class ControllerMyFlightsScene {
@@ -74,5 +77,9 @@ public class ControllerMyFlightsScene {
         AvailableFlightsScene = new Scene(AvailableFLightsRoot);
         window.setScene(AvailableFlightsScene);
         window.show();
+    }
+
+    public void handleDeleteFlightButton(ActionEvent event)throws Exception{
+
     }
 }
