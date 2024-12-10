@@ -59,7 +59,7 @@ public class Customer extends Account implements CustomerDBQ {
     }
 
     @Override
-    public void logIn(String InputUsername, String InputPassword) throws SQLException {
+    public String logIn(String InputUsername, String InputPassword) throws SQLException {
         try (Connection connection = getConnection()) {
             PreparedStatement loginPs = connection.prepareStatement(Queries.LOGIN);
 
@@ -82,10 +82,11 @@ public class Customer extends Account implements CustomerDBQ {
             e.printStackTrace();
             throw new SQLException("Database error occurred during login.");
         }
+        return "string";
     }
 
     @Override
-    public void retrievePassword(String Username, String SecurityQuestion, String SecurityAnswer) throws SQLException {
+    public String retrievePassword(String Username, String SecurityQuestion, String SecurityAnswer) throws SQLException {
         try (Connection connection = getConnection()) {
             PreparedStatement retrievePasswordPs = connection.prepareStatement(Queries.FORGOTPASSWORD);
 
@@ -98,6 +99,7 @@ public class Customer extends Account implements CustomerDBQ {
             System.out.println("Password Retrieved.");
             connection.close();
         }
+        return "string";
     }
 
     public static String getSecurityQuestion(String username) throws SQLException {
@@ -162,7 +164,7 @@ public class Customer extends Account implements CustomerDBQ {
 
             bookFlightPs.executeUpdate();
 
-            return "Flight Booked.";
+            return "Flight Booked";
         }
     }
 
