@@ -189,12 +189,12 @@ public class Customer extends Account implements CustomerDBQ {
         }
     }
 
-     */
+      */
 
     public String deleteFlight(String FlightID) throws SQLException {
         try (Connection connection = getConnection()) {
             // Prepare SQL query for deleting a flight based on the FlightID
-            PreparedStatement deleteFlightPs = connection.prepareStatement(Queries.DELETEFLIGHT);
+            PreparedStatement deleteFlightPs = connection.prepareStatement(Queries.CUSTDELETEFLIGHT);
 
             // Set the FlightID parameter in the query
             deleteFlightPs.setString(1, FlightID);
