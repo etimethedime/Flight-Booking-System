@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import static org.example.flightbooking.ExceptionHandler.AdminValidateRegistrationInput;
+
 import static org.example.flightbooking.ExceptionHandler.validateRegistrationInput;
 
 public abstract class Admin extends Account implements AdminDBQ{
@@ -32,9 +32,10 @@ public abstract class Admin extends Account implements AdminDBQ{
 
     @Override
     public String register(String employeeId, String username, String password,
-                                  String firstName, String lastName) throws SQLException {
+                                  String firstName, String lastName, String securityQuestion,
+                           String securityAnswer, String SSN, String email,String address) throws SQLException {
         // Validate input fields
-        String validationError = AdminValidateRegistrationInput(employeeId,username,password,firstName,lastName);
+        String validationError = validateRegistrationInput(username,password,firstName,lastName,email,address,SSN,securityQuestion,securityAnswer);
         if (validationError != null) {
             return "Registration failed: " + validationError;
         }
@@ -56,6 +57,19 @@ public abstract class Admin extends Account implements AdminDBQ{
         } catch (SQLException e) {
             e.printStackTrace();
             return "Registration failed: Database error.";
+        }
+    }
+
+    @Override
+    public void adminViewFlights(String Flight_ID) throws SQLException{
+        try (Connection connection = getConnection()) {
+            PreparedStatement viewFlightsPs = connection.prepareStatement(Queries.GETFLIGHT);
+
+            viewFlightsPs.setString(1,Flight_ID);
+
+            viewFlightsPs.executeUpdate();
+            System.out.println("Here is Flights");
+            connection.close();
         }
     }
     @Override
