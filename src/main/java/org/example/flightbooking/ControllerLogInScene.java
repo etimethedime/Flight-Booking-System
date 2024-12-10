@@ -1,4 +1,5 @@
 package org.example.flightbooking;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -20,32 +21,38 @@ public class ControllerLogInScene {
     public Scene AvailableFlightsScene;
     public Parent openSceneRoot;
     public Parent AvailableFlightsRoot;
+
     @FXML
     public TextField username;
+
     @FXML
     public TextField password;
+
+    @FXML
+    public Text errorMessage;
 
     public static Customer c1 = new Customer();
 
     @FXML
     private void handleSuccessfulLogin(ActionEvent event) throws IOException, SQLException {
-
-        if(c1.logIn(username.getText(), password.getText())){
+        errorMessage.setText("");
+        if (c1.logIn(username.getText(), password.getText())) {
             c1.setUser(username.getText());
-
             AvailableFlightsRoot = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("AvailableFlightsScene.fxml")));
-            window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+            window = (Stage) ((Node) event.getSource()).getScene().getWindow();
             AvailableFlightsScene = new Scene(AvailableFlightsRoot);
             window.setScene(AvailableFlightsScene);
             window.show();
+        } else {
+            errorMessage.setText("Username or password incorrect");
         }
     }
+
     public void handleLeaveLogIn(ActionEvent event) throws IOException {
         openSceneRoot = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("openScene.fxml")));
-        window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         openScene = new Scene(openSceneRoot);
         window.setScene(openScene);
         window.show();
     }
-
 }
