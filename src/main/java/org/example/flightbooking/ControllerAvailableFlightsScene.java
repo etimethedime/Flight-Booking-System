@@ -1,6 +1,7 @@
 package org.example.flightbooking;
 
 import javafx.animation.TranslateTransition;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -8,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -27,10 +29,15 @@ public class ControllerAvailableFlightsScene {
     public Parent openSceneRoot;
     public Parent MyFlightsRoot;
     public Parent AccountSettingsRoot;
+    public Parent BookFlightVerrificationRoot;
     public Scene openScene;
     public Scene MyFlightScene;
     public Scene AccountSettingsScene;
-    public Stage window;
+    public Scene BookFlightVerrificationScene;
+    public Stage window = new Stage();
+    public static Flight selectedFlight;
+
+
 
 
     @FXML
@@ -62,10 +69,19 @@ public class ControllerAvailableFlightsScene {
     @FXML
     private TableColumn<Flight, String> TerminalCol = new TableColumn<>();
 
+    @FXML
+    private ComboBox<String> seatOptionComboBox;
+
 
 
     public void initialize() throws SQLException {
         initializeFlightViewTable();
+
+        // Create the options for the ComboBox
+        ObservableList<String> seatOptions = FXCollections.observableArrayList("Aisle", "Window", "Middle");
+
+        // Set the items in the ComboBox
+        seatOptionComboBox.setItems(seatOptions);
     }
     @FXML
     private void handleMenuButtonClick() {
@@ -122,6 +138,26 @@ public class ControllerAvailableFlightsScene {
         System.out.println(list.toString());
     }
 
+    @FXML
+    private void handleBookFlightButton(ActionEvent event) throws Exception{
+
+        selectedFlight = getSelectedFlight();
+        BookFlightVerrificationRoot = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("BookFlightVerificationScene.fxml")));
+        window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        BookFlightVerrificationScene = new Scene(BookFlightVerrificationRoot);
+        window.setScene(BookFlightVerrificationScene);
+        window.show();
+
+    }
+
+    public Flight getSelectedFlight(){
+        return tableView.getSelectionModel().getSelectedItem();
+
+    }
+
+/*
+
+ */
 
 
 }

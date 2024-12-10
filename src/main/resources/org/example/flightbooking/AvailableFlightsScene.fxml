@@ -24,8 +24,9 @@
                 <HBox spacing="10.0">
                     <children>
                         <DatePicker fx:id="departureDatePicker" prefWidth="200.0" promptText="Departure Date" />
+                        <ComboBox fx:id="seatOptionComboBox" prefWidth="150.0" promptText="Seat Option" />
                         <Button fx:id="searchButton" prefWidth="100.0" style="-fx-background-color: #a8d5a8; -fx-text-fill: #ffffff; -fx-font-size: 17; -fx-background-radius: 10;" text="Search Flights" />
-                  <Button onAction="#initializeFlightViewTable" style="-fx-background-color: #88c488; -fx-text-fill: #ffffff; -fx-font-size: 17; -fx-background-radius: 10;" text="Refresh page" />
+                        <Button onAction="#initializeFlightViewTable" style="-fx-background-color: #88c488; -fx-text-fill: #ffffff; -fx-font-size: 17; -fx-background-radius: 10;" text="Refresh page" />
                     </children>
                 </HBox>
             </children>
@@ -49,6 +50,6 @@
                 <TableColumn fx:id="TerminalCol" prefWidth="100.0" text="Terminal" />
             </columns>
         </TableView>
-        <Button layoutX="446.0" layoutY="668.0" style="-fx-background-color: #88c488; -fx-text-fill: #ffffff; -fx-font-size: 17; -fx-background-radius: 10;" text="Book Flight" />
+        <Button layoutX="446.0" layoutY="668.0" onAction="#handleBookFlightButton" style="-fx-background-color: #88c488; -fx-text-fill: #ffffff; -fx-font-size: 17; -fx-background-radius: 10;" text="Book Flight" />
     </children>
 </AnchorPane>

@@ -151,15 +151,14 @@ public class Customer extends Account implements CustomerDBQ {
      */
 
     //@Override
-    public String bookFlight(String Booking_ID, String Username, String Flight_ID, String Seat_Number)
+    public String bookFlight(String Username, String Flight_ID, String Seat_Number)
             throws SQLException {
         try (Connection connection = getConnection()) {
             PreparedStatement bookFlightPs = connection.prepareStatement(Queries.BOOKFLIGHT);
 
-            bookFlightPs.setString(1, Booking_ID);
-            bookFlightPs.setString(2, Username);
-            bookFlightPs.setString(3, Flight_ID);
-            bookFlightPs.setString(4, Seat_Number);
+            bookFlightPs.setString(1, Username);
+            bookFlightPs.setString(2, Flight_ID);
+            bookFlightPs.setString(3, Seat_Number);
 
             bookFlightPs.executeUpdate();
 
@@ -258,6 +257,7 @@ public class Customer extends Account implements CustomerDBQ {
         }
         return flightlist;
     }
+
 
 
     public String getUser() {
