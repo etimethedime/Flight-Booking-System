@@ -44,24 +44,23 @@ public class ControllerMyFlightsScene {
 
     @FXML
     private TableColumn<Flight, String> SeatCol;
-
-
-    @FXML
-    private void initialize() throws SQLException {
+    
+    public void initialize() throws SQLException {
         initializeMyFlightsViewTable();
     }
 
 
-    private void initializeMyFlightsViewTable() throws SQLException {
+    public void initializeMyFlightsViewTable() throws SQLException {
         ObservableList<FlightBooked> list = ControllerLogInScene.c1.getUserFlights();
 
-        BookingID.setCellValueFactory(new PropertyValueFactory<>("Booking ID"));
-        FlightID.setCellValueFactory(new PropertyValueFactory<>("Flight ID"));
-        DepartureCityCol.setCellValueFactory(new PropertyValueFactory<>("Departure"));
-        ArrivalCityCol.setCellValueFactory(new PropertyValueFactory<>("Arrival"));
-        DepartureTimeCol.setCellValueFactory(new PropertyValueFactory<>("Departure Time"));
-        ArrivalTimeCol.setCellValueFactory(new PropertyValueFactory<>("Arrival Time"));
-        SeatCol.setCellValueFactory(new PropertyValueFactory<>("Seating Option"));
+        BookingID.setCellValueFactory(new PropertyValueFactory<>("bookingID"));
+        FlightID.setCellValueFactory(new PropertyValueFactory<>("flightID"));
+        DepartureCityCol.setCellValueFactory(new PropertyValueFactory<>("departureCity"));
+        ArrivalCityCol.setCellValueFactory(new PropertyValueFactory<>("arrivalCity"));
+        DepartureTimeCol.setCellValueFactory(new PropertyValueFactory<>("departureTime"));
+        ArrivalTimeCol.setCellValueFactory(new PropertyValueFactory<>("arrivalTime"));
+        SeatCol.setCellValueFactory(new PropertyValueFactory<>("seat"));
+
 
         MyFlightsView.setItems(list);
         MyFlightsView.refresh();
