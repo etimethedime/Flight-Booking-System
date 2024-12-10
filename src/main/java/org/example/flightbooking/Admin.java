@@ -1,15 +1,16 @@
 package org.example.flightbooking;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
+import java.sql.*;
 
 
+import static org.example.flightbooking.ExceptionHandler.adminValidateRegistrationInput;
 import static org.example.flightbooking.ExceptionHandler.validateRegistrationInput;
 
-public abstract class Admin extends Account implements AdminDBQ{
-
+public class Admin extends Account implements AdminDBQ, CustomerDBQ{
+    private String user;
     /*
     public Admin (String firstName, String lastName, String street, String zipCode, String state, String username,
                      String password, String email, String SSN, String secQuestion, String secAnswer, String secPIN) {
@@ -31,17 +32,16 @@ public abstract class Admin extends Account implements AdminDBQ{
     }
 
     @Override
-    public String register(String employeeId, String username, String password,
-                                  String firstName, String lastName, String securityQuestion,
-                           String securityAnswer, String SSN, String email,String address) throws SQLException {
+    public String adminRegister(String employeeId, String username, String password,
+                                  String firstName, String lastName) throws SQLException {
         // Validate input fields
-        String validationError = validateRegistrationInput(username,password,firstName,lastName,email,address,SSN,securityQuestion,securityAnswer);
+        String validationError = adminValidateRegistrationInput(employeeId, username, password, firstName, lastName);
         if (validationError != null) {
             return "Registration failed: " + validationError;
         }
 
         try (Connection connection = getConnection()) {
-            PreparedStatement registerPs = connection.prepareStatement(Queries.REGISTER);
+            PreparedStatement registerPs = connection.prepareStatement(Queries.ADMINREGISTER);
 
             // Set parameters for the PreparedStatement
             registerPs.setString(1, employeeId);
@@ -61,32 +61,76 @@ public abstract class Admin extends Account implements AdminDBQ{
     }
 
     @Override
-    public void adminViewFlights(String Flight_ID) throws SQLException{
-        try (Connection connection = getConnection()) {
-            PreparedStatement viewFlightsPs = connection.prepareStatement(Queries.ADMINGETFLIGHT);
+    public ObservableList<Flight> getAllFlights() throws SQLException {
+        ObservableList<Flight> flightlist = FXCollections.observableArrayList();
 
-            viewFlightsPs.setString(1,Flight_ID);
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(Queries.GETFLIGHTS);
+             ResultSet resultSet = preparedStatement.executeQuery()) {
 
-            viewFlightsPs.executeUpdate();
-            System.out.println("Here is Flights");
-            connection.close();
+            while (resultSet.next()) {
+                String FlightID = resultSet.getString("Flight_ID");
+                String FlightNO = resultSet.getString("Flight_Number");
+                String DepartureCity = resultSet.getString("Departure_City");
+                String ArrivalCity = resultSet.getString("Arrival_City");
+                String DepartureTime = resultSet.getString("Departure_Time");
+                String ArrivalTime = resultSet.getString("Arrival_Time");
+                String Terminal = resultSet.getString("Terminal");
+                flightlist.add(new Flight(FlightID, FlightNO, DepartureCity, ArrivalCity, DepartureTime, ArrivalTime, Terminal));
+            }
+
+
+            if (flightlist.isEmpty()) {
+                return null;
+            }
         }
+        return flightlist;
     }
+
+
     @Override
-    public void logIn(String Username, String Password) throws SQLException {
+    public boolean adminLogIn(String InputUsername, String InputPassword) throws SQLException {
         try (Connection connection = getConnection()) {
-            PreparedStatement loginPs = connection.prepareStatement(Queries.LOGIN);
+            PreparedStatement loginPs = connection.prepareStatement(Queries.ADMINLOGIN);
 
-            loginPs.setString(1, Username);
-            loginPs.setString(2, Password);
+            // Set parameters for the query
+            loginPs.setString(1, InputUsername);
+            loginPs.setString(2, InputPassword);
 
-            loginPs.executeUpdate();
-            System.out.println("Login successful.");
-            connection.close();
+            // Execute the query
+            ResultSet loginRs = loginPs.executeQuery();
+
+            // Validate the result
+            if (loginRs.next()) {
+                System.out.println("Login successful. Welcome, " + loginRs.getString("username") + "!");
+                return true;
+            } else {
+                throw new IllegalArgumentException("Login failed: Invalid username or password.");
+
+            }
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new SQLException("Database error occurred during login.");
         }
+        return false;
     }
+
     @Override
-    public void retrievePassword(String Username, String SecurityQuestion, String SecurityAnswer) throws SQLException {
+    public String register(String Username, String Password, String FirstName, String LastName, String Email, String address, String SSN, String SecurityQuestion, String SecurityAnswer) throws SQLException {
+        Customer c1 = new Customer();
+        return c1.register(Username,Password,FirstName, LastName, Email, address, SSN, SecurityQuestion, SecurityAnswer);
+    }
+
+    @Override
+    public boolean logIn(String Username, String Password) throws SQLException {
+        Customer c1 = new Customer();
+        return c1.logIn(Username, Password);
+    }
+
+    @Override
+    public String retrievePassword(String Username, String SecurityQuestion, String SecurityAnswer) throws SQLException {
         try (Connection connection = getConnection()) {
             PreparedStatement retrievePasswordPs = connection.prepareStatement(Queries.FORGOTPASSWORD);
 
@@ -99,42 +143,32 @@ public abstract class Admin extends Account implements AdminDBQ{
             System.out.println("Password Retrieved.");
             connection.close();
         }
+        return "string";
     }
+
     @Override
-    public void changePassword(String Password, String Username) throws SQLException {
-        try (Connection connection = getConnection()) {
-            PreparedStatement changePasswordPs = connection.prepareStatement(Queries.CHANGEPASSWORD);
-
-            changePasswordPs.setString(1, Password);
-            changePasswordPs.setString(2, Username);
-
-
-            changePasswordPs.executeUpdate();
-            System.out.println("Password Changed.");
-            connection.close();
-        }
+    public String deleteFlight(String FlightID) throws SQLException {
+        Customer c1 = new Customer();
+        return c1.deleteFlight(FlightID);
     }
+
     @Override
-    public void adminBookFlight(String Booking_ID, String Username, String Flight_ID, String Seat_Number)
-            throws SQLException {
-        try (Connection connection = getConnection()) {
-            PreparedStatement adminBookFlightPs = connection.prepareStatement(Queries.BOOKFLIGHT);
-
-            adminBookFlightPs.setString(1, Booking_ID);
-            adminBookFlightPs.setString(2, Username);
-            adminBookFlightPs.setString(3, Flight_ID);
-            adminBookFlightPs.setString(4, Seat_Number);
-
-            adminBookFlightPs.executeUpdate();
-            System.out.println("Flight Booked.");
-            connection.close();
-        }
+    public String bookFlight(String Username, String Flight_ID, String Seat_Number) throws SQLException {
+        Customer c1 = new Customer();
+        return c1.bookFlight(Username, Flight_ID, Seat_Number);
     }
+
+    @Override
+    public String getUserFlights(String Username) throws SQLException {
+        Customer c1 = new Customer();
+        return c1.getUserFlights(Username);
+    }
+
     @Override
     public void adminUpdateFlight(String DepartureTime, String ArrivalTime, String Terminal, String FlightID)
             throws SQLException {
         try (Connection connection = getConnection()) {
-            PreparedStatement adminUpdateFlightPs = connection.prepareStatement(Queries.CHANGEFLIGHT);
+            PreparedStatement adminUpdateFlightPs = connection.prepareStatement(Queries.ADMINCHANGEFLIGHT);
 
             adminUpdateFlightPs.setString(1, DepartureTime);
             adminUpdateFlightPs.setString(2, ArrivalTime);
@@ -143,13 +177,12 @@ public abstract class Admin extends Account implements AdminDBQ{
 
             adminUpdateFlightPs.executeUpdate();
             System.out.println("Flight Updated.");
-            connection.close();
         }
     }
     @Override
     public void adminDeleteFlight(String FlightID) throws SQLException {
         try (Connection connection = getConnection()) {
-            PreparedStatement adminDeleteFlightPs = connection.prepareStatement(Queries.DELETEFLIGHT);
+            PreparedStatement adminDeleteFlightPs = connection.prepareStatement(Queries.ADMINDELETEFLIGHT);
 
             adminDeleteFlightPs.setString(1, FlightID);
 
@@ -157,5 +190,18 @@ public abstract class Admin extends Account implements AdminDBQ{
             System.out.println("Flight Deleted.");
             connection.close();
         }
+    }
+
+    @Override
+    public String adminInsertFlight(String Flight_ID, String Flight_Number, String Departure_City, String Arrival_City, String Departure_Time, String Arrival_Time, String Terminal) throws SQLException {
+        return null;
+    }
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
     }
 }

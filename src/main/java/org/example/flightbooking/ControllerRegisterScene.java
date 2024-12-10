@@ -15,10 +15,14 @@ import java.util.Objects;
 
 public class ControllerRegisterScene {
 
+
     @FXML
     private TextField firstName;
     @FXML
     private TextField lastName;
+
+    @FXML
+    private TextField EmployeeID;
 
     @FXML
     private TextField address;
@@ -53,8 +57,7 @@ public class ControllerRegisterScene {
 
 
         Customer customer = new Customer();
-        System.out.println(customer.register(username,password,firstName,lastName,email,address,SSN,secQuestion,secAnswer));
-
+        System.out.println(customer.register(username, password, firstName, lastName, email, address, SSN, secQuestion, secAnswer));
     }
 
     public void handleLogInButtonClick(ActionEvent event) throws IOException {

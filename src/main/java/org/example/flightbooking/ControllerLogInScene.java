@@ -1,12 +1,9 @@
 package org.example.flightbooking;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ComboBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
@@ -18,13 +15,13 @@ import java.util.Objects;
 
 public class ControllerLogInScene {
 
+    private int UserType; // customer is 1, admin is two
+
     public Stage window;
     public Scene openScene;
     public Scene AvailableFlightsScene;
     public Parent openSceneRoot;
     public Parent AvailableFlightsRoot;
-    @FXML
-    public ComboBox<String> modeSwitch;
     @FXML
     public TextField username;
     @FXML
@@ -32,24 +29,31 @@ public class ControllerLogInScene {
 
     public static Customer c1 = new Customer();
 
-    public void initialize() throws Exception {
+    public static Admin a1 = new Admin();
 
-        // Create the options for the ComboBox
-        ObservableList<String> mode = FXCollections.observableArrayList("Admin","Passenger");
-
-        // Set the items in the ComboBox
-        modeSwitch.setItems(mode);
-    }
     @FXML
     private void handleSuccessfulLogin(ActionEvent event) throws IOException, SQLException {
 
-        if(c1.logIn(username.getText(), password.getText())){
-            c1.setUser(username.getText());
-            AvailableFlightsRoot = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("AvailableFlightsScene.fxml")));
-            window = (Stage) ((Node)event.getSource()).getScene().getWindow();
-            AvailableFlightsScene = new Scene(AvailableFlightsRoot);
-            window.setScene(AvailableFlightsScene);
-            window.show();
+        switch (UserType) {
+            case 1:
+                if(c1.logIn(username.getText(), password.getText())) {
+                    c1.setUser(username.getText());
+                    AvailableFlightsRoot = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("AvailableFlightsScene.fxml")));
+                    window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                    AvailableFlightsScene = new Scene(AvailableFlightsRoot);
+                    window.setScene(AvailableFlightsScene);
+                    window.show();
+                }
+
+            case 2:
+                if(a1.logIn(username.getText(), password.getText())) {
+                    a1.setUser(username.getText());
+                    AvailableFlightsRoot = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("AvailableFlightsScene.fxml")));
+                    window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                    AvailableFlightsScene = new Scene(AvailableFlightsRoot);
+                    window.setScene(AvailableFlightsScene);
+                    window.show();
+                }
         }
     }
     public void handleLeaveLogIn(ActionEvent event) throws IOException {
