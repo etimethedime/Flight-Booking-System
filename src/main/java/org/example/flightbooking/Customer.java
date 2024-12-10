@@ -4,20 +4,22 @@ import java.sql.*;
 
 import static org.example.flightbooking.ExceptionHandler.validateRegistrationInput;
 
-public abstract class Customer extends Account implements CustomerDBQ {
+public class Customer extends Account implements CustomerDBQ {
+
+    private String user;
 
     public Customer(){
 
     }
     public static Connection getConnection() throws SQLException {
         Connection connection = DriverManager.getConnection(
-                "jdbc:mysql://cis32702024.mysql.database.azure.com:3306/cosmas",
+                "jdbc:mysql://cis32702024.mysql.database.azure.com:3306/flightbooker",
                 "ezradegafe1", "GSUproject123");
         System.out.println("Database connected");
         return connection;
     }
 
-
+    @Override
     public String register(String Username, String Password, String FirstName, String LastName, String Email,
                                   String Address, String SSN, String SecurityQuestion, String SecurityAnswer) throws SQLException {
         // Validate input fields
@@ -42,6 +44,7 @@ public abstract class Customer extends Account implements CustomerDBQ {
 
             // Execute the statement
             registerPs.executeUpdate();
+            setUser(Username);
             return "User registered successfully.";
         } catch (SQLException e) {
             e.printStackTrace();
@@ -177,8 +180,8 @@ public abstract class Customer extends Account implements CustomerDBQ {
     }
 
      */
-    //@Override //gonna worry about this later
-    public static String deleteFlight(String FlightID) throws SQLException {
+
+    public String deleteFlight(String FlightID) throws SQLException {
         try (Connection connection = getConnection()) {
             // Prepare SQL query for deleting a flight based on the FlightID
             PreparedStatement deleteFlightPs = connection.prepareStatement(Queries.DELETEFLIGHT);
@@ -201,4 +204,34 @@ public abstract class Customer extends Account implements CustomerDBQ {
         }
     }
 
+    @Override
+    public String getUserFlights(String Username) throws SQLException {
+            StringBuilder allNames = new StringBuilder("All names:\n");
+
+            try (Connection connection = getConnection();
+                 PreparedStatement preparedStatement = connection.prepareStatement(Queries.USERFLIGHTS);
+                 ResultSet resultSet = preparedStatement.executeQuery()) {
+
+                while (resultSet.next()) {
+                    String firstName = resultSet.getString("firstname");
+                    String mi = resultSet.getString("mi");
+                    String lastName = resultSet.getString("lastname");
+                    allNames.append(firstName).append(" ").append(mi).append(" ").append(lastName).append("\n");
+                }
+
+                if (allNames.length() <= "All names:\n".length()) {
+                    return "No names found in the database.";
+                }
+            }
+            return allNames.toString().trim();
+        }
+
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
 }

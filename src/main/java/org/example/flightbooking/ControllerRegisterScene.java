@@ -26,10 +26,6 @@ public class ControllerRegisterScene {
     private TextField secAnswer = new TextField();
 
     public Stage window;
-    public Scene openScene;
-    public Parent openSceneRoot;
-    public Scene nextScene;
-    public Parent nextRoot;
     public Scene logInScene;
     public Parent logInRoot;
 
@@ -47,26 +43,9 @@ public class ControllerRegisterScene {
         String secAnswer = this.secAnswer.getText();
 
 
+        Customer customer = new Customer();
+        customer.register(username,password,firstName,lastName,email,address,SSN,secQuestion,secAnswer);
 
-
-// merging
-
-
-        //Customer customer = new Customer();
-        //customer.register(username,password,firstName,lastName,email,address,SSN,secQuestion,secAnswer);
-
-        //customer class should have method to add newly registered user into database
-    }
-    public void handleRegister (ActionEvent event) throws IOException, SQLException {
-        Register();
-        System.out.println("Account created!");
-    }
-    public void handleLeaveRegister (ActionEvent event) throws IOException {
-        openSceneRoot = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("openScene.fxml")));
-        window = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        openScene = new Scene(openSceneRoot);
-        window.setScene(openScene);
-        window.show();
     }
 
     public void handleLogInButtonClick(ActionEvent event) throws IOException {
