@@ -17,7 +17,7 @@ public class Queries {
 
                 //For ADMIN
     public static final String ADMINLOGIN = "SELECT Username, Password FROM Admin WHERE Username = ? AND Password = ?"; // SELECT
-    public static final String ADMINREGISTER = "INSEERT INTO User (Employee_ID, Username, Password, FirstName, LastName "
+    public static final String ADMINREGISTER = "INSERT INTO Admin (Employee_ID, Username, Password, First_Name, Last_Name) "
                         + "VALUES(?, ?, ?, ?, ?); "; //INSERT TO REGISTER ADMIN
     public static final String ADMININSERTFLIGHT = "INSERT INTO FLIGHTS (Flight_ID, Flight_Number, Departure_City, Arrival_City, Departure_Time, Arrival_Time, Terminal) " +
             "VALUES(?, ?, ?, ?, ?, ?, ?)";

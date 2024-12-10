@@ -7,12 +7,9 @@ import java.util.Scanner;
 
 public class Runner {
     public static void main(String[] args) throws SQLException {
-            Customer c1 = new Customer();
-            c1.register("etimthedime", "Ezra4565","Ezra", "Degafe", "ezra54311@gmail.com",
-                    "2554 Camrey Ct, Lawrenceville, Ga, 30044","123-12-1234",
-                    "What is your favorite color?","green");
-
-
+            Admin a1 = new Admin();
+        System.out.println(a1.adminRegister("002624014","AdminEzra","Admin2003" ,"Admin2003" ,
+                "Ezra" ,"Degafe"));
         }
 
     }
