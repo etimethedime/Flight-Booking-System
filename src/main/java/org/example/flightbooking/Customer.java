@@ -53,7 +53,7 @@ public class Customer extends Account implements CustomerDBQ {
     }
 
     @Override
-    public void logIn(String InputUsername, String InputPassword) throws SQLException {
+    public String logIn(String InputUsername, String InputPassword) throws SQLException {
         try (Connection connection = getConnection()) {
             PreparedStatement loginPs = connection.prepareStatement(Queries.LOGIN);
 
@@ -66,20 +66,20 @@ public class Customer extends Account implements CustomerDBQ {
 
             // Validate the result
             if (loginRs.next()) {
-                System.out.println("Login successful. Welcome, " + loginRs.getString("username") + "!");
+                return "Login successful. Welcome, " + loginRs.getString("username") + "!";
             } else {
                 throw new IllegalArgumentException("Login failed: Invalid username or password.");
             }
         } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
+            return e.getMessage();
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new SQLException("Database error occurred during login.");
+            return "Database error occurred during login.";
         }
     }
 
     @Override
-    public void retrievePassword(String Username, String SecurityQuestion, String SecurityAnswer) throws SQLException {
+    public String retrievePassword(String Username, String SecurityQuestion, String SecurityAnswer) throws SQLException {
         try (Connection connection = getConnection()) {
             PreparedStatement retrievePasswordPs = connection.prepareStatement(Queries.FORGOTPASSWORD);
 
@@ -89,8 +89,7 @@ public class Customer extends Account implements CustomerDBQ {
 
 
             retrievePasswordPs.executeUpdate();
-            System.out.println("Password Retrieved.");
-            connection.close();
+            return "Password Retrieved.";
         }
     }
 

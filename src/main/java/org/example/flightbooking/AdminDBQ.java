@@ -17,8 +17,6 @@ public abstract interface AdminDBQ {
     public abstract void adminDeleteFlight(String FlightID) throws SQLException; // should delete flight for specified USER using DELETE query
     public abstract void adminViewFlights(String Flight_ID) throws SQLException;
 
-
-
     }
 
 
