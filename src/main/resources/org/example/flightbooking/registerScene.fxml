@@ -74,10 +74,27 @@
             <Region />
          </children>
       </HBox>
+      <HBox alignment="CENTER" layoutX="30.0" layoutY="510.0" prefHeight="31.0" prefWidth="330.0" spacing="10.0" GridPane.rowIndex="13">
+         <children>
+            <Region />
+            <Text fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #7cc47c;" text="Are you an Admin?" wrappingWidth="138.4058837890625">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Text>
+            <Button mnemonicParsing="false" onAction="#handleCustomerRegisterButtonClick" prefHeight="22.0" prefWidth="108.0" style="-fx-background-color: transparent; -fx-text-fill: #88c488; -fx-font-size: 14; -fx-underline: true;" text="Admin Register">
+               <padding>
+                  <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+               </padding>
+            </Button>
+            <Region />
+         </children>
+      </HBox>
       <columnConstraints>
          <ColumnConstraints />
       </columnConstraints>
       <rowConstraints>
+         <RowConstraints />
          <RowConstraints />
          <RowConstraints />
          <RowConstraints />
