@@ -1,23 +1,22 @@
 package org.example.flightbooking;
+import javafx.animation.TranslateTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-
-import java.net.URL;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import javafx.util.Duration;
 import java.sql.SQLException;
-import java.util.ResourceBundle;
+import java.util.Objects;
 
 public class ControllerAdminFlightManagingScene {
     @FXML
@@ -39,19 +38,11 @@ public class ControllerAdminFlightManagingScene {
     @FXML
     private TableColumn<Flight, String> TerminalCol = new TableColumn<>();
 
-    @FXML
-    private ComboBox<String> seatOptionComboBox;
 
-
-    public void initialize() throws SQLException {
+    public void initialize() throws Exception{
         initializeFlightViewTable();
-
-        // Create the options for the ComboBox
-        ObservableList<String> seatOptions = FXCollections.observableArrayList("Aisle", "Window", "Middle");
-
-        // Set the items in the ComboBox
-        seatOptionComboBox.setItems(seatOptions);
     }
+
 
     public void initializeFlightViewTable() throws SQLException {
         ObservableList<Flight> list = ControllerLogInScene.c1.getAllFlights();

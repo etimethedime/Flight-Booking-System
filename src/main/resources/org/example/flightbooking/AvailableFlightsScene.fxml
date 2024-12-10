@@ -32,6 +32,7 @@
         <VBox fx:id="hiddenPane" layoutX="-250.0" layoutY="0.0" spacing="20.0" style="-fx-background-color: #f1f1f1; -fx-border-radius: 10; -fx-padding: 20;">
             <children>
                 <Button fx:id="myFlightsButton" onAction="#handleMyFlightsSceneClick" prefWidth="200.0" style="-fx-background-color: #a8d5a8; -fx-text-fill: #ffffff; -fx-font-size: 17; -fx-background-radius: 10;" text="My Flights" />
+            <Button fx:id="myFlightsButton1" layoutX="30.0" layoutY="30.0" onAction="#handleAdminManageFlightScene" prefWidth="200.0" style="-fx-background-color: #a8d5a8; -fx-text-fill: #ffffff; -fx-font-size: 17; -fx-background-radius: 10;" text="Manage Flights (ADMIN)" />
                 <Button fx:id="signOffButton" onAction="#handleSignOffButtonClick" prefWidth="200.0" style="-fx-background-color: #a8d5a8; -fx-text-fill: #ffffff; -fx-font-size: 17; -fx-background-radius: 10;" text="Sign Off" />
             </children>
         </VBox>
@@ -48,6 +49,6 @@
         </TableView>
         <Button layoutX="446.0" layoutY="668.0" onAction="#handleBookFlightButton" style="-fx-background-color: #88c488; -fx-text-fill: #ffffff; -fx-font-size: 17; -fx-background-radius: 10;" text="Book Flight" />
             <Button fx:id="searchButton" layoutX="727.0" layoutY="100.0" prefHeight="33.0" prefWidth="130.0" style="-fx-background-color: #a8d5a8; -fx-text-fill: #ffffff; -fx-font-size: 17; -fx-background-radius: 10;" text="Search Flights" />
-            <Button layoutX="17.0" layoutY="104.0" onAction="#initializeFlightViewTable" style="-fx-background-color: #88c488; -fx-text-fill: #ffffff; -fx-font-size: 17; -fx-background-radius: 10;" text="Refresh page" />
+            <Button layoutX="832.0" layoutY="151.0" onAction="#initializeFlightViewTable" style="-fx-background-color: #88c488; -fx-text-fill: #ffffff; -fx-font-size: 17; -fx-background-radius: 10;" text="Refresh page" />
     </children>
 </AnchorPane>
