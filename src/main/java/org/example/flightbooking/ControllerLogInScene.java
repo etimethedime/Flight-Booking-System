@@ -1,9 +1,12 @@
 package org.example.flightbooking;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ComboBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
@@ -21,12 +24,22 @@ public class ControllerLogInScene {
     public Parent openSceneRoot;
     public Parent AvailableFlightsRoot;
     @FXML
+    public ComboBox<String> modeSwitch;
+    @FXML
     public TextField username;
     @FXML
     public TextField password;
 
     public static Customer c1 = new Customer();
 
+    public void initialize() throws Exception {
+
+        // Create the options for the ComboBox
+        ObservableList<String> mode = FXCollections.observableArrayList("Admin","Passenger");
+
+        // Set the items in the ComboBox
+        modeSwitch.setItems(mode);
+    }
     @FXML
     private void handleSuccessfulLogin(ActionEvent event) throws IOException, SQLException {
 
