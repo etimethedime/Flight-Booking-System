@@ -1,8 +1,12 @@
 package org.example.flightbooking;
 
+import java.sql.SQLException;
 import java.util.Scanner;
 
 public class Runner {
+    public static void main(String[] args) {
+        Customer c1 = new Customer();
+    }
 
 }
    /* //for laughs and giggles

@@ -16,6 +16,10 @@ public class ControllerMyFlightsScene {
     public Scene AvailableFlightsScene;
     public Stage window;
 
+    public void getMyFlights(){
+
+    }
+
     public void GoBackToAvailableFlightsButtonClick(ActionEvent event)throws Exception{
         AvailableFLightsRoot = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("AvaialableFlightsScene.fxml")));
         window = (Stage) ((Node)event.getSource()).getScene().getWindow();
