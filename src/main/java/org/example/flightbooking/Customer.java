@@ -116,6 +116,7 @@ public class Customer extends Account implements CustomerDBQ {
             }
         }
     }
+    //merging
 
     public static String getPassword(String username, String securityAnswer) throws SQLException {
         try (Connection connection = getConnection();
