@@ -58,4 +58,12 @@ public class ControllerAdminRegisterScene {
         window.show();
     }
 
+    public void handleCustomerRegisterButtonClick (ActionEvent event) throws IOException {
+        logInRoot = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("registerScene.fxml")));
+        window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        logInScene= new Scene(logInRoot);
+        window.setScene(logInScene);
+        window.show();
+    }
+
 }
