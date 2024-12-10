@@ -82,6 +82,7 @@ public class Customer extends Account implements CustomerDBQ {
             e.printStackTrace();
             return "Database error occurred during login.";
         }
+        return "string";
     }
 
     @Override
@@ -97,6 +98,7 @@ public class Customer extends Account implements CustomerDBQ {
             retrievePasswordPs.executeUpdate();
             return "Password Retrieved.";
         }
+        return "string";
     }
 
     public static String getSecurityQuestion(String username) throws SQLException {
@@ -161,7 +163,7 @@ public class Customer extends Account implements CustomerDBQ {
 
             bookFlightPs.executeUpdate();
 
-            return "Flight Booked.";
+            return "Flight Booked";
         }
     }
 
