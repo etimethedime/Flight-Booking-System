@@ -7,7 +7,11 @@ import java.util.Scanner;
 
 public class Runner {
     public static void main(String[] args) throws SQLException {
-        ObservableList<Flight> list = ControllerLogInScene.c1.getAllFlights();
+            Customer c1 = new Customer();
+            c1.register("etimthedime", "Ezra4565","Ezra", "Degafe", "ezra54311@gmail.com",
+                    "2554 Camrey Ct, Lawrenceville, Ga, 30044","123-12-1234",
+                    "What is your favorite color?","green");
+
 
         }
 

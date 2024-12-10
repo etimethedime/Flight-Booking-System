@@ -59,7 +59,7 @@ public class Customer extends Account implements CustomerDBQ {
     }
 
     @Override
-    public String logIn(String InputUsername, String InputPassword) throws SQLException {
+    public boolean logIn(String InputUsername, String InputPassword) throws SQLException {
         try (Connection connection = getConnection()) {
             PreparedStatement loginPs = connection.prepareStatement(Queries.LOGIN);
 
@@ -72,16 +72,19 @@ public class Customer extends Account implements CustomerDBQ {
 
             // Validate the result
             if (loginRs.next()) {
-                return "Login successful. Welcome, " + loginRs.getString("username") + "!";
+                System.out.println("Login successful. Welcome, " + loginRs.getString("username") + "!");
+                return true;
             } else {
                 throw new IllegalArgumentException("Login failed: Invalid username or password.");
+
             }
         } catch (IllegalArgumentException e) {
-            return e.getMessage();
+            System.out.println(e.getMessage());
         } catch (SQLException e) {
             e.printStackTrace();
-            return "Database error occurred during login.";
+            throw new SQLException("Database error occurred during login.");
         }
+        return false;
     }
 
     @Override
@@ -95,8 +98,10 @@ public class Customer extends Account implements CustomerDBQ {
 
 
             retrievePasswordPs.executeUpdate();
-            return "Password Retrieved.";
+            System.out.println("Password Retrieved.");
+            connection.close();
         }
+        return "string";
     }
 
     public static String getSecurityQuestion(String username) throws SQLException {
