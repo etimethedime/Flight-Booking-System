@@ -1,14 +1,22 @@
 package org.example.flightbooking;
 
+import javafx.collections.ObservableList;
+
 import java.sql.SQLException;
 import java.util.Scanner;
 
 public class Runner {
-    public static void main(String[] args) {
-        Customer c1 = new Customer();
+    public static void main(String[] args) throws SQLException {
+            Customer c1 = new Customer();
+            c1.register("etimthedime", "Ezra4565","Ezra", "Degafe", "ezra54311@gmail.com",
+                    "2554 Camrey Ct, Lawrenceville, Ga, 30044","123-12-1234",
+                    "What is your favorite color?","green");
+
+
+        }
+
     }
 
-}
    /* //for laughs and giggles
     public static void main(String[] args) {
         String firstName;

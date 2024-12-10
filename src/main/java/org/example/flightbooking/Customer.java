@@ -1,6 +1,12 @@
 package org.example.flightbooking;
 
+import javafx.beans.Observable;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.sql.*;
+import java.util.LinkedList;
+import java.util.Queue;
 
 import static org.example.flightbooking.ExceptionHandler.validateRegistrationInput;
 
@@ -53,7 +59,7 @@ public class Customer extends Account implements CustomerDBQ {
     }
 
     @Override
-    public String logIn(String InputUsername, String InputPassword) throws SQLException {
+    public boolean logIn(String InputUsername, String InputPassword) throws SQLException {
         try (Connection connection = getConnection()) {
             PreparedStatement loginPs = connection.prepareStatement(Queries.LOGIN);
 
@@ -66,16 +72,19 @@ public class Customer extends Account implements CustomerDBQ {
 
             // Validate the result
             if (loginRs.next()) {
-                return "Login successful. Welcome, " + loginRs.getString("username") + "!";
+                System.out.println("Login successful. Welcome, " + loginRs.getString("username") + "!");
+                return true;
             } else {
                 throw new IllegalArgumentException("Login failed: Invalid username or password.");
+
             }
         } catch (IllegalArgumentException e) {
-            return e.getMessage();
+            System.out.println(e.getMessage());
         } catch (SQLException e) {
             e.printStackTrace();
-            return "Database error occurred during login.";
+            throw new SQLException("Database error occurred during login.");
         }
+        return false;
     }
 
     @Override
@@ -89,8 +98,10 @@ public class Customer extends Account implements CustomerDBQ {
 
 
             retrievePasswordPs.executeUpdate();
-            return "Password Retrieved.";
+            System.out.println("Password Retrieved.");
+            connection.close();
         }
+        return "string";
     }
 
     public static String getSecurityQuestion(String username) throws SQLException {
@@ -107,6 +118,7 @@ public class Customer extends Account implements CustomerDBQ {
             }
         }
     }
+    //merging
 
     public static String getPassword(String username, String securityAnswer) throws SQLException {
         try (Connection connection = getConnection();
@@ -144,19 +156,18 @@ public class Customer extends Account implements CustomerDBQ {
      */
 
     //@Override
-    public String bookFlight(String Booking_ID, String Username, String Flight_ID, String Seat_Number)
+    public String bookFlight(String Username, String Flight_ID, String Seat_Number)
             throws SQLException {
         try (Connection connection = getConnection()) {
             PreparedStatement bookFlightPs = connection.prepareStatement(Queries.BOOKFLIGHT);
 
-            bookFlightPs.setString(1, Booking_ID);
-            bookFlightPs.setString(2, Username);
-            bookFlightPs.setString(3, Flight_ID);
-            bookFlightPs.setString(4, Seat_Number);
+            bookFlightPs.setString(1, Username);
+            bookFlightPs.setString(2, Flight_ID);
+            bookFlightPs.setString(3, Seat_Number);
 
             bookFlightPs.executeUpdate();
 
-            return "Flight Booked.";
+            return "Flight Booked";
         }
     }
 
@@ -205,25 +216,53 @@ public class Customer extends Account implements CustomerDBQ {
 
     @Override
     public String getUserFlights(String Username) throws SQLException {
-            StringBuilder allNames = new StringBuilder("All names:\n");
+            StringBuilder allFlights = new StringBuilder("All names:\n");
 
             try (Connection connection = getConnection();
                  PreparedStatement preparedStatement = connection.prepareStatement(Queries.USERFLIGHTS);
                  ResultSet resultSet = preparedStatement.executeQuery()) {
 
                 while (resultSet.next()) {
-                    String firstName = resultSet.getString("firstname");
-                    String mi = resultSet.getString("mi");
-                    String lastName = resultSet.getString("lastname");
-                    allNames.append(firstName).append(" ").append(mi).append(" ").append(lastName).append("\n");
+                    String BookingID = resultSet.getString("Booking_ID");
+                    String FlightID = resultSet.getString("Flight_ID");
+                    String SeatNumber = resultSet.getString("Seat_Number");
+                    allFlights.append(BookingID).append(FlightID).append(SeatNumber).append("\n");
                 }
 
-                if (allNames.length() <= "All names:\n".length()) {
-                    return "No names found in the database.";
+                if (allFlights.length() <= "All names:\n".length()) {
+                    return "No flights booked.";
                 }
             }
-            return allNames.toString().trim();
+            return allFlights.toString().trim();
         }
+
+
+    public ObservableList<Flight> getAllFlights() throws SQLException {
+        ObservableList<Flight> flightlist = FXCollections.observableArrayList();
+
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(Queries.GETFLIGHTS);
+             ResultSet resultSet = preparedStatement.executeQuery()) {
+
+            while (resultSet.next()) {
+                String FlightID = resultSet.getString("Flight_ID");
+                String FlightNO = resultSet.getString("Flight_Number");
+                String DepartureCity = resultSet.getString("Departure_City");
+                String ArrivalCity = resultSet.getString("Arrival_City");
+                String DepartureTime = resultSet.getString("Departure_Time");
+                String ArrivalTime = resultSet.getString("Arrival_Time");
+                String Terminal = resultSet.getString("Terminal");
+                flightlist.add(new Flight(FlightID, FlightNO, DepartureCity, ArrivalCity, DepartureTime, ArrivalTime, Terminal));
+            }
+
+
+            if (flightlist.isEmpty()) {
+                return null;
+            }
+        }
+        return flightlist;
+    }
+
 
 
     public String getUser() {

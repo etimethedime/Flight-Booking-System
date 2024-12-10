@@ -63,7 +63,7 @@ public abstract class Admin extends Account implements AdminDBQ{
     @Override
     public void adminViewFlights(String Flight_ID) throws SQLException{
         try (Connection connection = getConnection()) {
-            PreparedStatement viewFlightsPs = connection.prepareStatement(Queries.GETFLIGHT);
+            PreparedStatement viewFlightsPs = connection.prepareStatement(Queries.ADMINGETFLIGHT);
 
             viewFlightsPs.setString(1,Flight_ID);
 

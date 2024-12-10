@@ -16,9 +16,10 @@ public class Queries {
 
 
                 // For Flights
-    public static final String GETFLIGHT = " SELECT Flight_ID, Flight_Number, Departure_City, Arrival_City, Departure_Time, Arrival_Time, Terminal FROM FLIGHTS_BOOKED WHERE Flight_ID = ?"; // SELECT
+    public static final String GETFLIGHTS = "SELECT * FROM FLIGHTS"; // SELECT
+    public static final String ADMINGETFLIGHT = " SELECT Flight_ID, Flight_Number, Departure_City, Arrival_City, Departure_Time, Arrival_Time, Terminal FROM FLIGHTS_BOOKED WHERE Flight_ID = ?"; // SELECT
     public static final String USERFLIGHTS = "SELECT * FROM FLIGHTS_BOOKED WHERE Username = ?";
-    public static final String BOOKFLIGHT = "INSERT INTO FLIGHTS (Booking_ID, Username, Flight_ID, Seat_Number) " + "VALUES(?, ?, ?, ?)"; // INSERT
+    public static final String BOOKFLIGHT = "INSERT INTO FLIGHTS_BOOKED (Username, Flight_ID, Seat_Number) " + "VALUES(?, ?, ?)"; // INSERT
     public static final String CHANGEFLIGHT = "UPDATE FLIGHTS SET Departure_Time = ?, Arrival_Time = ?, Terminal = ? WHERE Flight_ID = ?"; // UPDATE
     public static final String DELETEFLIGHT = "DELETE FROM FLIGHTS WHERE Flight_ID = ?"; //DELETE
 
