@@ -25,16 +25,16 @@
    </Text>
 
    <GridPane hgap="10.0" layoutX="300.0" layoutY="150.0" prefHeight="550.0" prefWidth="400.0" style="-fx-padding: 20px;" vgap="15.0">
-      <TextField promptText="First Name" style="-fx-font-size: 14px; -fx-background-color: #ffffff; -fx-border-radius: 5px;" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-      <TextField promptText="Last Name" style="-fx-font-size: 14px; -fx-background-color: #ffffff; -fx-border-radius: 5px;" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-      <TextField promptText="email@address.com" style="-fx-font-size: 14px; -fx-background-color: #ffffff; -fx-border-radius: 5px;" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-      <TextField promptText="Username" style="-fx-font-size: 14px; -fx-background-color: #ffffff; -fx-border-radius: 5px;" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-      <PasswordField promptText="Password" style="-fx-font-size: 14px; -fx-background-color: #ffffff; -fx-border-radius: 5px;" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+      <TextField fx:id="firstName" promptText="First Name" style="-fx-font-size: 14px; -fx-background-color: #ffffff; -fx-border-radius: 5px;" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+      <TextField fx:id="lastName" promptText="Last Name" style="-fx-font-size: 14px; -fx-background-color: #ffffff; -fx-border-radius: 5px;" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+      <TextField fx:id="email" promptText="email@address.com" style="-fx-font-size: 14px; -fx-background-color: #ffffff; -fx-border-radius: 5px;" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+      <TextField fx:id="username" promptText="Username" style="-fx-font-size: 14px; -fx-background-color: #ffffff; -fx-border-radius: 5px;" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+      <PasswordField fx:id="password" promptText="Password" style="-fx-font-size: 14px; -fx-background-color: #ffffff; -fx-border-radius: 5px;" GridPane.columnIndex="0" GridPane.rowIndex="4" />
       <PasswordField promptText="Confirm Password" style="-fx-font-size: 14px; -fx-background-color: #ffffff; -fx-border-radius: 5px;" GridPane.columnIndex="0" GridPane.rowIndex="5" />
-      <TextField promptText="Address" style="-fx-font-size: 14px; -fx-background-color: #ffffff; -fx-border-radius: 5px;" GridPane.columnIndex="0" GridPane.rowIndex="6" />
-      <TextField promptText="SSN" style="-fx-font-size: 14px; -fx-background-color: #ffffff; -fx-border-radius: 5px;" GridPane.columnIndex="0" GridPane.rowIndex="7" />
+      <TextField fx:id="address" promptText="Address" style="-fx-font-size: 14px; -fx-background-color: #ffffff; -fx-border-radius: 5px;" GridPane.columnIndex="0" GridPane.rowIndex="6" />
+      <TextField fx:id="SSN" promptText="SSN" style="-fx-font-size: 14px; -fx-background-color: #ffffff; -fx-border-radius: 5px;" GridPane.columnIndex="0" GridPane.rowIndex="7" />
 
-      <ComboBox fx:id="securityQuestionComboBox" promptText="Security Question" style="-fx-font-size: 14px; -fx-background-color: #ffffff; -fx-border-radius: 5px;" GridPane.columnIndex="0" GridPane.rowIndex="8">
+      <ComboBox fx:id="secQuestion" promptText="Security Question" style="-fx-font-size: 14px; -fx-background-color: #ffffff; -fx-border-radius: 5px;" GridPane.columnIndex="0" GridPane.rowIndex="8">
          <items>
             <FXCollections fx:factory="observableArrayList">
                <String fx:value="What is your mother's maiden name?" />
@@ -45,7 +45,7 @@
          </items>
       </ComboBox>
 
-      <TextField promptText="Answer" style="-fx-font-size: 14px; -fx-background-color: #ffffff; -fx-border-radius: 5px;" GridPane.columnIndex="0" GridPane.rowIndex="9" />
+      <TextField fx:id="secAnswer" promptText="Answer" style="-fx-font-size: 14px; -fx-background-color: #ffffff; -fx-border-radius: 5px;" GridPane.columnIndex="0" GridPane.rowIndex="9" />
 
       <HBox alignment="CENTER" spacing="10.0" GridPane.columnIndex="0" GridPane.rowIndex="10">
          <children>

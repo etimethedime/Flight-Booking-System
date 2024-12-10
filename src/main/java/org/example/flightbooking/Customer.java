@@ -59,7 +59,7 @@ public class Customer extends Account implements CustomerDBQ {
     }
 
     @Override
-    public String logIn(String InputUsername, String InputPassword) throws SQLException {
+    public boolean logIn(String InputUsername, String InputPassword) throws SQLException {
         try (Connection connection = getConnection()) {
             PreparedStatement loginPs = connection.prepareStatement(Queries.LOGIN);
 
@@ -73,8 +73,10 @@ public class Customer extends Account implements CustomerDBQ {
             // Validate the result
             if (loginRs.next()) {
                 System.out.println("Login successful. Welcome, " + loginRs.getString("username") + "!");
+                return true;
             } else {
                 throw new IllegalArgumentException("Login failed: Invalid username or password.");
+
             }
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
@@ -82,7 +84,7 @@ public class Customer extends Account implements CustomerDBQ {
             e.printStackTrace();
             throw new SQLException("Database error occurred during login.");
         }
-        return "string";
+        return false;
     }
 
     @Override
