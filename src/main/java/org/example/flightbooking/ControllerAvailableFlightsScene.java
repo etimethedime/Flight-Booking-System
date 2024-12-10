@@ -24,9 +24,11 @@ public class ControllerAvailableFlightsScene {
     public Parent openSceneRoot;
     public Parent MyFlightsRoot;
     public Parent BookFlightVerrificationRoot;
+    public Parent ManageFlightRoot;
     public Scene openScene;
     public Scene MyFlightScene;
     public Scene BookFlightVerrificationScene;
+    public Scene ManageFlightScene;
     public Stage window = new Stage();
     @FXML
     private VBox hiddenPane;
@@ -85,6 +87,7 @@ public class ControllerAvailableFlightsScene {
         TranslateTransition transition = new TranslateTransition();
         transition.setNode(hiddenPane);
         transition.setDuration(Duration.seconds(0.3));
+        System.out.println("hello");
 
         if (hiddenPane.getLayoutX() < 0) {
             transition.setToX(250);
@@ -107,6 +110,14 @@ public class ControllerAvailableFlightsScene {
         window = (Stage) ((Node)event.getSource()).getScene().getWindow();
         openScene = new Scene(openSceneRoot);
         window.setScene(openScene);
+        window.show();
+    }
+    @FXML
+    private void handleAdminManageFlightScene(ActionEvent event) throws Exception {
+        ManageFlightRoot = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("AdminFlightManagingScene.fxml")));
+        window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        ManageFlightScene = new Scene(ManageFlightRoot);
+        window.setScene(ManageFlightScene);
         window.show();
     }
     @FXML
