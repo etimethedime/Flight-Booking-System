@@ -2,8 +2,8 @@ package org.example.flightbooking;
 
 public class ExceptionHandler {
     public static String validateRegistrationInput(String Username, String Password, String FirstName, String LastName,
-                                                    String Email, String Address, String SSN, String SecurityQuestion,
-                                                    String SecurityAnswer) {
+                                                   String Email, String Address, String SSN, String SecurityQuestion,
+                                                   String SecurityAnswer) {
         // Check if any field is null or empty
         if (Username == null || Username.trim().isEmpty()) return "Username cannot be empty.";
         if (Password == null || Password.length() < 8) return "Password must be at least 8 characters long.";

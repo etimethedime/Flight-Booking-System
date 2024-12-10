@@ -14,7 +14,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
-import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import java.sql.SQLException;
@@ -31,21 +30,10 @@ public class ControllerAvailableFlightsScene {
     public Scene AccountSettingsScene;
     public Scene BookFlightVerrificationScene;
     public Stage window = new Stage();
-    public static Flight selectedFlight;
-
-
-
-
     @FXML
     private VBox hiddenPane;
-    @FXML
-    private Button menuButton;
-    @FXML
-    private Button meButton;
-    @FXML
-    private Button accountSettingsButton;
-    @FXML
-    private Button signOffButton;
+    public static Flight selectedFlight;
+
     @FXML
     private TableView<Flight> tableView = new TableView<>();
 
@@ -79,6 +67,21 @@ public class ControllerAvailableFlightsScene {
         // Set the items in the ComboBox
         seatOptionComboBox.setItems(seatOptions);
     }
+
+    public void initializeFlightViewTable() throws SQLException {
+        ObservableList<Flight> list = ControllerLogInScene.c1.getAllFlights();
+        FlightIDCol.setCellValueFactory(new PropertyValueFactory<>("FlightID"));
+        FlightNumberCol.setCellValueFactory(new PropertyValueFactory<>("FlightNO"));
+        DepartureCityCol.setCellValueFactory(new PropertyValueFactory<>("DepartureCity"));
+        ArrivalCityCol.setCellValueFactory(new PropertyValueFactory<>("ArrivalCity"));
+        DepartureTimeCol.setCellValueFactory(new PropertyValueFactory<>("DepartureTime"));
+        ArrivalTimeCol.setCellValueFactory(new PropertyValueFactory<>("ArrivalTime"));
+        TerminalCol.setCellValueFactory(new PropertyValueFactory<>("Terminal"));
+
+        tableView.setItems(list);
+        tableView.refresh();
+        System.out.println(list.toString());
+    }
     @FXML
     private void handleMenuButtonClick() {
         TranslateTransition transition = new TranslateTransition();
@@ -93,7 +96,6 @@ public class ControllerAvailableFlightsScene {
 
         transition.play();
     }
-
     public void handleMyFlightsSceneClick(ActionEvent event)throws Exception{
         MyFlightsRoot = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("MyFlightsScene.fxml")));
         window = (Stage) ((Node)event.getSource()).getScene().getWindow();
@@ -101,15 +103,6 @@ public class ControllerAvailableFlightsScene {
         window.setScene(MyFlightScene);
         window.show();
     }
-
-    public void handleAccountSettingsButtonClick(ActionEvent event) throws Exception {
-        AccountSettingsRoot = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("AccountSettingScene.fxml")));
-        window = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        AccountSettingsScene = new Scene(AccountSettingsRoot);
-        window.setScene(AccountSettingsScene);
-        window.show();
-    }
-
     @FXML
     private void handleSignOffButtonClick(ActionEvent event) throws Exception {
         openSceneRoot = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("openScene.fxml")));
@@ -118,22 +111,6 @@ public class ControllerAvailableFlightsScene {
         window.setScene(openScene);
         window.show();
     }
-
-    public   void initializeFlightViewTable() throws SQLException {
-        ObservableList<Flight> list = ControllerLogInScene.c1.getAllFlights();
-        FlightIDCol.setCellValueFactory(new PropertyValueFactory<>("FlightID"));
-        FlightNumberCol.setCellValueFactory(new PropertyValueFactory<>("FlightNO"));
-        DepartureCityCol.setCellValueFactory(new PropertyValueFactory<>("DepartureCity"));
-        ArrivalCityCol.setCellValueFactory(new PropertyValueFactory<>("ArrivalCity"));
-        DepartureTimeCol.setCellValueFactory(new PropertyValueFactory<>("DepartureTime"));
-        ArrivalTimeCol.setCellValueFactory(new PropertyValueFactory<>("ArrivalTime"));
-        TerminalCol.setCellValueFactory(new PropertyValueFactory<>("Terminal"));
-
-        tableView.setItems(list);
-        tableView.refresh();
-        System.out.println(list.toString());
-    }
-
     @FXML
     private void handleBookFlightButton(ActionEvent event) throws Exception{
 
@@ -153,10 +130,6 @@ public class ControllerAvailableFlightsScene {
         return tableView.getSelectionModel().getSelectedItem();
 
     }
-
-/*
-
- */
 
 
 }

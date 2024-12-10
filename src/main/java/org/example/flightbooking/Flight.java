@@ -3,6 +3,7 @@ package org.example.flightbooking;
 public class Flight {
 
     String FlightID;
+    String BookingID;
     String FlightNO;
     String DepartureCity;
     String ArrivalCity;

@@ -1,12 +1,9 @@
 package org.example.flightbooking;
 
-import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.sql.*;
-import java.util.LinkedList;
-import java.util.Queue;
 
 import static org.example.flightbooking.ExceptionHandler.validateRegistrationInput;
 
@@ -14,9 +11,18 @@ public class Customer extends Account implements CustomerDBQ {
 
     private String user;
 
-    public Customer(){
+    public Customer() {
 
     }
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
+
     public static Connection getConnection() throws SQLException {
         Connection connection = DriverManager.getConnection(
                 "jdbc:mysql://cis32702024.mysql.database.azure.com:3306/flightbooker",
@@ -27,7 +33,7 @@ public class Customer extends Account implements CustomerDBQ {
 
     @Override
     public String register(String Username, String Password, String FirstName, String LastName, String Email,
-                                  String Address, String SSN, String SecurityQuestion, String SecurityAnswer) throws SQLException {
+                           String Address, String SSN, String SecurityQuestion, String SecurityAnswer) throws SQLException {
         // Validate input fields
         String validationError = validateRegistrationInput(Username, Password, FirstName, LastName, Email, Address, SSN, SecurityQuestion, SecurityAnswer);
         if (validationError != null) {
@@ -154,9 +160,10 @@ public class Customer extends Account implements CustomerDBQ {
     }
 
      */
-
-    //@Override
-    public String bookFlight(String Username, String Flight_ID, String Seat_Number)
+    @Override
+    public String bookFlight(String Username, String Flight_ID, String Seat_Number,
+                             String DepartureCity, String ArrivalCity,
+                             String DepartureTime, String ArrivalTime)
             throws SQLException {
         try (Connection connection = getConnection()) {
             PreparedStatement bookFlightPs = connection.prepareStatement(Queries.BOOKFLIGHT);
@@ -164,12 +171,19 @@ public class Customer extends Account implements CustomerDBQ {
             bookFlightPs.setString(1, Username);
             bookFlightPs.setString(2, Flight_ID);
             bookFlightPs.setString(3, Seat_Number);
+            bookFlightPs.setString(4, DepartureCity);
+            bookFlightPs.setString(5, ArrivalCity);
+            bookFlightPs.setString(6, DepartureTime);
+            bookFlightPs.setString(7, ArrivalTime);
 
             bookFlightPs.executeUpdate();
 
             return "Flight Booked";
         }
     }
+
+
+
 
     /*
     @Override
@@ -215,28 +229,6 @@ public class Customer extends Account implements CustomerDBQ {
     }
 
     @Override
-    public String getUserFlights(String Username) throws SQLException {
-            StringBuilder allFlights = new StringBuilder("All names:\n");
-
-            try (Connection connection = getConnection();
-                 PreparedStatement preparedStatement = connection.prepareStatement(Queries.USERFLIGHTS);
-                 ResultSet resultSet = preparedStatement.executeQuery()) {
-
-                while (resultSet.next()) {
-                    String BookingID = resultSet.getString("Booking_ID");
-                    String FlightID = resultSet.getString("Flight_ID");
-                    String SeatNumber = resultSet.getString("Seat_Number");
-                    allFlights.append(BookingID).append(FlightID).append(SeatNumber).append("\n");
-                }
-
-                if (allFlights.length() <= "All names:\n".length()) {
-                    return "No flights booked.";
-                }
-            }
-            return allFlights.toString().trim();
-        }
-
-
     public ObservableList<Flight> getAllFlights() throws SQLException {
         ObservableList<Flight> flightlist = FXCollections.observableArrayList();
 
@@ -263,13 +255,37 @@ public class Customer extends Account implements CustomerDBQ {
         return flightlist;
     }
 
+    @Override
+    public ObservableList<FlightBooked> getUserFlights() throws SQLException {
+        ObservableList<FlightBooked> flightBookedList = FXCollections.observableArrayList();
 
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(Queries.USERFLIGHTS)) {
 
-    public String getUser() {
-        return user;
+            // Set the parameter for the query
+            preparedStatement.setString(1, ControllerLogInScene.c1.getUser());
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    String BookingID = resultSet.getString("BookingID");
+                    String FlightID = resultSet.getString("Flight_ID");
+                    String DepartureCity = resultSet.getString("DepartureCity");
+                    String ArrivalCity = resultSet.getString("ArrivalCity");
+                    String DepartureTime = resultSet.getString("DepartureTime");
+                    String ArrivalTime = resultSet.getString("ArrivalTime");
+                    String Seat = resultSet.getString("Seat_Number");
+
+                    flightBookedList.add(new FlightBooked(BookingID, FlightID, DepartureCity, ArrivalCity, DepartureTime, ArrivalTime, Seat));
+                }
+            }
+
+            if (flightBookedList.isEmpty()) {
+                return null;
+            }
+        }
+        return flightBookedList;
     }
 
-    public void setUser(String user) {
-        this.user = user;
-    }
+
+
 }
