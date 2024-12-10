@@ -16,9 +16,11 @@ public interface CustomerDBQ {
 
     public String deleteFlight(String FlightID) throws SQLException; // should delete flight using DELETE query
 
-    public String bookFlight(String Username, String Flight_ID, String Seat_Number) throws SQLException;
+    public String bookFlight(String Username, String Flight_ID, String Seat_Number,
+                             String DepartureCity, String ArrivalCity,
+                             String DepartureTime, String ArrivalTime) throws SQLException;
 
-    public String getUserFlights(String Username) throws SQLException;// should add a booked flight using INSERT query
+    public ObservableList<FlightBooked> getUserFlights() throws SQLException;// should add a booked flight using INSERT query
 
     public ObservableList<Flight> getAllFlights () throws SQLException;
 
