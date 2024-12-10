@@ -8,6 +8,7 @@ import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Objects;
 
 public class ControllerLogInScene {
@@ -18,10 +19,9 @@ public class ControllerLogInScene {
     public Parent openSceneRoot;
     public Parent AvailableFlightsRoot;
     public static Customer c1 = new Customer();
-    //public String user = c1.getUser();
 
     @FXML
-    private void handleSuccessfulLogin(ActionEvent event) throws IOException {
+    private void handleSuccessfulLogin(ActionEvent event) throws IOException, SQLException {
         // Load the Available Flights Scene
 
         AvailableFlightsRoot = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("AvailableFlightsScene.fxml")));
@@ -29,7 +29,6 @@ public class ControllerLogInScene {
         AvailableFlightsScene = new Scene(AvailableFlightsRoot);
         window.setScene(AvailableFlightsScene);
         window.show();
-
         // call customer class method to log in using SELECT QUERY
         // upon successful login, user is taken to next scene
 

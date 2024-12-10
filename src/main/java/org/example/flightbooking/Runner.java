@@ -8,11 +8,11 @@ import java.util.Scanner;
 public class Runner {
     public static void main(String[] args) throws SQLException {
         ObservableList<Flight> list = ControllerLogInScene.c1.getAllFlights();
-        System.out.println(list.toString());
+
+        }
 
     }
 
-}
    /* //for laughs and giggles
     public static void main(String[] args) {
         String firstName;

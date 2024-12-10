@@ -43,24 +43,30 @@ public class ControllerAvailableFlightsScene {
     private Button accountSettingsButton;
     @FXML
     private Button signOffButton;
-    private TableView<Flight> tableView;
+    @FXML
+    private TableView<Flight> tableView = new TableView<>();
 
     @FXML
-    private TableColumn<Flight, String> FlightIDCol;
+    private TableColumn<Flight, String> FlightIDCol = new TableColumn<>();
 
     @FXML
-    private TableColumn<Flight, String> FlightNumberCol;
+    private TableColumn<Flight, String> FlightNumberCol = new TableColumn<>();
     @FXML
-    private TableColumn<Flight, String> DepartureCityCol;
+    private TableColumn<Flight, String> DepartureCityCol = new TableColumn<>();
     @FXML
-    private TableColumn<Flight, String> ArrivalCityCol;
+    private TableColumn<Flight, String> ArrivalCityCol = new TableColumn<>();
     @FXML
-    private TableColumn<Flight, String> DepartureTimeCol;
+    private TableColumn<Flight, String> DepartureTimeCol = new TableColumn<>();
     @FXML
-    private TableColumn<Flight, String> ArrivalTimeCol;
+    private TableColumn<Flight, String> ArrivalTimeCol = new TableColumn<>();
     @FXML
-    private TableColumn<Flight, String> TerminalCol;
+    private TableColumn<Flight, String> TerminalCol = new TableColumn<>();
 
+
+
+    public void initialize() throws SQLException {
+        initializeFlightViewTable();
+    }
     @FXML
     private void handleMenuButtonClick() {
         TranslateTransition transition = new TranslateTransition();
@@ -101,7 +107,7 @@ public class ControllerAvailableFlightsScene {
         window.show();
     }
 
-    private void initializeFlightViewTable() throws SQLException {
+    public   void initializeFlightViewTable() throws SQLException {
         ObservableList<Flight> list = ControllerLogInScene.c1.getAllFlights();
         FlightIDCol.setCellValueFactory(new PropertyValueFactory<>("FlightID"));
         FlightNumberCol.setCellValueFactory(new PropertyValueFactory<>("FlightNO"));
@@ -112,6 +118,8 @@ public class ControllerAvailableFlightsScene {
         TerminalCol.setCellValueFactory(new PropertyValueFactory<>("Terminal"));
 
         tableView.setItems(list);
+        tableView.refresh();
+        System.out.println(list.toString());
     }
 
 
