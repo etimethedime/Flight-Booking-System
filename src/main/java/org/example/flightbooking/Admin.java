@@ -153,16 +153,28 @@ public class Admin extends Account implements AdminDBQ, CustomerDBQ{
     }
 
     @Override
+    public String bookFlight(String Username, String Flight_ID, String Seat_Number, String DepartureCity, String ArrivalCity, String DepartureTime, String ArrivalTime) throws SQLException {
+        return "";
+    }
+
+    @Override
+    public ObservableList<FlightBooked> getUserFlights() throws SQLException {
+        return null;
+    }
+    /*
+
+    @Override
     public String bookFlight(String Username, String Flight_ID, String Seat_Number) throws SQLException {
         Customer c1 = new Customer();
         return c1.bookFlight(Username, Flight_ID, Seat_Number);
     }
-
     @Override
     public String getUserFlights(String Username) throws SQLException {
         Customer c1 = new Customer();
         return c1.getUserFlights(Username);
     }
+
+     */
 
     @Override
     public void adminUpdateFlight(String DepartureTime, String ArrivalTime, String Terminal, String FlightID)

@@ -23,11 +23,9 @@ public class ControllerAvailableFlightsScene {
 
     public Parent openSceneRoot;
     public Parent MyFlightsRoot;
-    public Parent AccountSettingsRoot;
     public Parent BookFlightVerrificationRoot;
     public Scene openScene;
     public Scene MyFlightScene;
-    public Scene AccountSettingsScene;
     public Scene BookFlightVerrificationScene;
     public Stage window = new Stage();
     @FXML

@@ -20,10 +20,6 @@ public class ControllerRegisterScene {
     private TextField firstName;
     @FXML
     private TextField lastName;
-
-    @FXML
-    private TextField EmployeeID;
-
     @FXML
     private TextField address;
     @FXML
