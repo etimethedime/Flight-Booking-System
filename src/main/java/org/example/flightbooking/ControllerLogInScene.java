@@ -15,6 +15,8 @@ import java.util.Objects;
 
 public class ControllerLogInScene {
 
+    private int UserType; // customer is 1, admin is two
+
     public Stage window;
     public Scene openScene;
     public Scene AvailableFlightsScene;
@@ -27,16 +29,31 @@ public class ControllerLogInScene {
 
     public static Customer c1 = new Customer();
 
+    public static Admin a1 = new Admin();
+
     @FXML
     private void handleSuccessfulLogin(ActionEvent event) throws IOException, SQLException {
 
-        if(c1.logIn(username.getText(), password.getText())){
-            c1.setUser(username.getText());
-            AvailableFlightsRoot = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("AvailableFlightsScene.fxml")));
-            window = (Stage) ((Node)event.getSource()).getScene().getWindow();
-            AvailableFlightsScene = new Scene(AvailableFlightsRoot);
-            window.setScene(AvailableFlightsScene);
-            window.show();
+        switch (UserType) {
+            case 1:
+                if(c1.logIn(username.getText(), password.getText())) {
+                    c1.setUser(username.getText());
+                    AvailableFlightsRoot = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("AvailableFlightsScene.fxml")));
+                    window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                    AvailableFlightsScene = new Scene(AvailableFlightsRoot);
+                    window.setScene(AvailableFlightsScene);
+                    window.show();
+                }
+
+            case 2:
+                if(a1.logIn(username.getText(), password.getText())) {
+                    a1.setUser(username.getText());
+                    AvailableFlightsRoot = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("AvailableFlightsScene.fxml")));
+                    window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                    AvailableFlightsScene = new Scene(AvailableFlightsRoot);
+                    window.setScene(AvailableFlightsScene);
+                    window.show();
+                }
         }
     }
     public void handleLeaveLogIn(ActionEvent event) throws IOException {
