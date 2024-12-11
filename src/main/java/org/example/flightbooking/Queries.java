@@ -22,7 +22,8 @@ public class Queries {
     public static final String ADMININSERTFLIGHT = "INSERT INTO FLIGHTS (Flight_ID, Flight_Number, Departure_City, Arrival_City, Departure_Time, Arrival_Time, Terminal) " +
             "VALUES(?, ?, ?, ?, ?, ?, ?)";
 
-    public static final String ADMINCHANGEFLIGHT = "UPDATE FLIGHTS SET Departure_Time = ?, Arrival_Time = ?, Terminal = ? WHERE Flight_ID = ?"; // UPDATE
+    public static final String ADMINCHANGEFLIGHT = "UPDATE FLIGHTS SET Flight_Number = ?, Departure_City = ?, Arrival_City = ?, Departure_Time = ?, Arrival_Time = ?, Terminal = ? WHERE Flight_ID = ?";
+    ; // UPDATE
     public static final String ADMINDELETEFLIGHT = "DELETE FROM FLIGHTS WHERE Flight_ID = ?"; //DELETE
 
                 // For Flights

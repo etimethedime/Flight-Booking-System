@@ -5,18 +5,21 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import javafx.util.Duration;
+
+import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Objects;
+import java.util.ResourceBundle;
 
 public class ControllerAdminFlightManagingScene {
     @FXML
@@ -39,8 +42,36 @@ public class ControllerAdminFlightManagingScene {
     private TableColumn<Flight, String> TerminalCol = new TableColumn<>();
 
 
-    public void initialize() throws Exception{
+    @FXML
+    private TextField flightIDTextField;
+    @FXML
+    private TextField flightNumberTextField;
+    @FXML
+    private TextField departureCityTextField;
+    @FXML
+    private TextField arrivalCityTextField;
+    @FXML
+    private TextField departureTimeTextField;
+    @FXML
+    private TextField arrivalTimeTextField;
+    @FXML
+    private TextField terminalTextField;
+
+
+    @FXML
+    private ComboBox<String> seatOptionComboBox;
+
+    public static Flight selectedFlight;
+
+
+    public void initialize() throws SQLException {
         initializeFlightViewTable();
+
+        // Create the options for the ComboBox
+        ObservableList<String> seatOptions = FXCollections.observableArrayList("Aisle", "Window", "Middle");
+
+        // Set the items in the ComboBox
+        //seatOptionComboBox.setItems(seatOptions);
     }
 
 
@@ -61,14 +92,33 @@ public class ControllerAdminFlightManagingScene {
 
     @FXML
     private void handleDeleteFlightFromDatabase(ActionEvent event)throws SQLException{
-
+        selectedFlight = adminGetSelectedFlight();
+        ControllerLogInScene.a1.adminDeleteFlight(selectedFlight.FlightID);
     }
     @FXML
     private void handleUpdateFlightFromDatabase(ActionEvent event)throws SQLException{
+        /*
+        selectedFlight = adminGetSelectedFlight();
+        flightIDTextField.setText(selectedFlight.FlightID);
+        flightNumberTextField.setText(selectedFlight.FlightNO);
+        departureCityTextField.setText(selectedFlight.DepartureCity);
+        arrivalCityTextField.setText(selectedFlight.ArrivalCity);
+        departureTimeTextField.setText(selectedFlight.DepartureTime);
+        arrivalTimeTextField.setText(selectedFlight.ArrivalTime);
+        terminalTextField.setText(selectedFlight.Terminal);
 
+         */
+
+        ControllerLogInScene.a1.adminUpdateFlight(flightNumberTextField.getText(), departureCityTextField.getText(), arrivalCityTextField.getText(), departureTimeTextField.getText(), arrivalTimeTextField.getText(), terminalTextField.getText(), flightIDTextField.getText());
     }
     @FXML
     private void handleInsertFlightFromDatabase(ActionEvent event)throws SQLException{
+        selectedFlight = adminGetSelectedFlight();
+        ControllerLogInScene.a1.adminInsertFlight(flightIDTextField.getText(), flightNumberTextField.getText(), departureCityTextField.getText(), arrivalCityTextField.getText(), departureTimeTextField.getText(), arrivalTimeTextField.getText(), terminalTextField.getText());
+    }
+
+    public Flight adminGetSelectedFlight(){
+        return tableView.getSelectionModel().getSelectedItem();
 
     }
 }
