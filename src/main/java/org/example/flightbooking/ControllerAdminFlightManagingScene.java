@@ -41,6 +41,23 @@ public class ControllerAdminFlightManagingScene {
     @FXML
     private TableColumn<Flight, String> TerminalCol = new TableColumn<>();
 
+
+    @FXML
+    private TextField flightIDTextField;
+    @FXML
+    private TextField flightNumberTextField;
+    @FXML
+    private TextField departureCityTextField;
+    @FXML
+    private TextField arrivalCityTextField;
+    @FXML
+    private TextField departureTimeTextField;
+    @FXML
+    private TextField arrivalTimeTextField;
+    @FXML
+    private TextField terminalTextField;
+
+
     @FXML
     private ComboBox<String> seatOptionComboBox;
 
@@ -54,7 +71,7 @@ public class ControllerAdminFlightManagingScene {
         ObservableList<String> seatOptions = FXCollections.observableArrayList("Aisle", "Window", "Middle");
 
         // Set the items in the ComboBox
-        seatOptionComboBox.setItems(seatOptions);
+        //seatOptionComboBox.setItems(seatOptions);
     }
 
 
@@ -75,18 +92,29 @@ public class ControllerAdminFlightManagingScene {
 
     @FXML
     private void handleDeleteFlightFromDatabase(ActionEvent event)throws SQLException{
-
+        selectedFlight = adminGetSelectedFlight();
+        ControllerLogInScene.a1.adminDeleteFlight(selectedFlight.FlightID);
     }
     @FXML
     private void handleUpdateFlightFromDatabase(ActionEvent event)throws SQLException{
+        /*
         selectedFlight = adminGetSelectedFlight();
-        ControllerLogInScene.a1.adminUpdateFlight(selectedFlight.DepartureTime, selectedFlight.ArrivalTime, selectedFlight.Terminal, selectedFlight.FlightID);
+        flightIDTextField.setText(selectedFlight.FlightID);
+        flightNumberTextField.setText(selectedFlight.FlightNO);
+        departureCityTextField.setText(selectedFlight.DepartureCity);
+        arrivalCityTextField.setText(selectedFlight.ArrivalCity);
+        departureTimeTextField.setText(selectedFlight.DepartureTime);
+        arrivalTimeTextField.setText(selectedFlight.ArrivalTime);
+        terminalTextField.setText(selectedFlight.Terminal);
 
+         */
+
+        ControllerLogInScene.a1.adminUpdateFlight(flightNumberTextField.getText(), departureCityTextField.getText(), arrivalCityTextField.getText(), departureTimeTextField.getText(), arrivalTimeTextField.getText(), terminalTextField.getText(), flightIDTextField.getText());
     }
     @FXML
     private void handleInsertFlightFromDatabase(ActionEvent event)throws SQLException{
         selectedFlight = adminGetSelectedFlight();
-        ControllerLogInScene.a1.adminInsertFlight(selectedFlight.FlightID, selectedFlight.FlightNO, selectedFlight.DepartureCity, selectedFlight.ArrivalCity, selectedFlight.DepartureTime, selectedFlight.ArrivalTime, selectedFlight.Terminal);
+        ControllerLogInScene.a1.adminInsertFlight(flightIDTextField.getText(), flightNumberTextField.getText(), departureCityTextField.getText(), arrivalCityTextField.getText(), departureTimeTextField.getText(), arrivalTimeTextField.getText(), terminalTextField.getText());
     }
 
     public Flight adminGetSelectedFlight(){

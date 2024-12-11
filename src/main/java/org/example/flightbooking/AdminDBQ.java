@@ -10,7 +10,8 @@ public interface AdminDBQ {
                                     String firstName, String lastName) throws SQLException; // should get registration information and add a new customer using INSERT
     public boolean adminLogIn(String Username, String Password) throws SQLException; // should get username and password using SELECT Query
 
-    public String adminUpdateFlight(String DepartureTime, String Arrival_Time, String Terminal, String Flight_ID) throws SQLException; // should change flight with new flight for specified USER using UPDATE query
+    public String adminUpdateFlight(String FlightId, String FlightNumber, String DepartureCity, String ArrivalCity, String DepartureTime, String ArrivalTime, String Terminal)
+        throws SQLException;
     public String adminDeleteFlight(String FlightID) throws SQLException; // should delete flight for specified USER using DELETE query;
     public String adminInsertFlight(String Flight_ID, String Flight_Number, String Departure_City, String Arrival_City, String Departure_Time,
                                     String Arrival_Time, String Terminal) throws SQLException;

@@ -178,20 +178,23 @@ public class Admin extends Account implements AdminDBQ, CustomerDBQ{
      */
 
     @Override
-    public String adminUpdateFlight(String DepartureTime, String ArrivalTime, String Terminal, String FlightID)
+    public String adminUpdateFlight(String FlightId, String FlightNumber, String DepartureCity, String ArrivalCity, String DepartureTime, String ArrivalTime, String Terminal)
             throws SQLException {
         try (Connection connection = getConnection()) {
             PreparedStatement adminUpdateFlightPs = connection.prepareStatement(Queries.ADMINCHANGEFLIGHT);
 
-            adminUpdateFlightPs.setString(1, DepartureTime);
-            adminUpdateFlightPs.setString(2, ArrivalTime);
-            adminUpdateFlightPs.setString(3, Terminal);
-            adminUpdateFlightPs.setString(4, FlightID);
+            adminUpdateFlightPs.setString(1, FlightNumber);
+            adminUpdateFlightPs.setString(2, DepartureCity);
+            adminUpdateFlightPs.setString(3, ArrivalCity);
+            adminUpdateFlightPs.setString(4, DepartureTime);
+            adminUpdateFlightPs.setString(5, ArrivalTime);
+            adminUpdateFlightPs.setString(6, Terminal);
+            adminUpdateFlightPs.setString(7, FlightId);
 
             int rowsAffected = adminUpdateFlightPs.executeUpdate();
 
             if (rowsAffected > 0) {
-                return "Flight with ID " + FlightID + " has been updated successfully.";
+                return "Flight with ID " + FlightId + " has been updated successfully.";
             } else {
                 return "Flight ID not found. No flight was updated.";
             }
