@@ -13,12 +13,14 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class ControllerAdminFlightManagingScene {
@@ -40,6 +42,8 @@ public class ControllerAdminFlightManagingScene {
     private TableColumn<Flight, String> ArrivalTimeCol = new TableColumn<>();
     @FXML
     private TableColumn<Flight, String> TerminalCol = new TableColumn<>();
+    @FXML
+    private VBox hiddenPane;
 
 
     @FXML
@@ -56,6 +60,16 @@ public class ControllerAdminFlightManagingScene {
     private TextField arrivalTimeTextField;
     @FXML
     private TextField terminalTextField;
+
+    Parent openSceneRoot;
+
+    Scene openScene;
+
+    Stage window;
+
+    Parent availableRoot;
+
+    Scene availableScene;
 
 
     @FXML
@@ -120,5 +134,38 @@ public class ControllerAdminFlightManagingScene {
     public Flight adminGetSelectedFlight(){
         return tableView.getSelectionModel().getSelectedItem();
 
+    }
+    @FXML
+    private void handleMenuButtonClick() {
+        TranslateTransition transition = new TranslateTransition();
+        transition.setNode(hiddenPane);
+        transition.setDuration(Duration.seconds(0.3));
+        System.out.println("hello");
+
+        if (hiddenPane.getLayoutX() < 0) {
+            transition.setToX(250);
+        } else {
+            transition.setToX(-250);
+        }
+
+        transition.play();
+    }
+
+    @FXML
+    private void handleSignOffButtonClick(ActionEvent event) throws Exception {
+        openSceneRoot = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("openScene.fxml")));
+        window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        openScene = new Scene(openSceneRoot);
+        window.setScene(openScene);
+        window.show();
+    }
+
+    @FXML
+    private void handleGoBackButtonClick(ActionEvent event) throws Exception {
+        availableRoot = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("AvailableFlightsScene.fxml")));
+        window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        availableScene = new Scene(availableRoot);
+        window.setScene(availableScene);
+        window.show();
     }
 }
