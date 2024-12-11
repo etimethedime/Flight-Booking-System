@@ -262,7 +262,6 @@ public class Customer extends Account implements CustomerDBQ {
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(Queries.USERFLIGHTS)) {
 
-            // Set the parameter for the query
             preparedStatement.setString(1, ControllerLogInScene.c1.getUser());
 
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
@@ -284,6 +283,38 @@ public class Customer extends Account implements CustomerDBQ {
             }
         }
         return flightBookedList;
+    }
+    @Override
+    public ObservableList<Flight> getSearchedFlights(String DepartureFrom, String ArrivalTo) throws SQLException {
+        ObservableList<Flight> flightlist = FXCollections.observableArrayList();
+
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(Queries.GETAFLIGHT);
+
+
+             ) {
+            preparedStatement.setString(1, DepartureFrom);
+            preparedStatement.setString(2, ArrivalTo);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                String FlightID = resultSet.getString("Flight_ID");
+                String FlightNO = resultSet.getString("Flight_Number");
+                String DepartureCity = resultSet.getString("Departure_City");
+                String ArrivalCity = resultSet.getString("Arrival_City");
+                String DepartureTime = resultSet.getString("Departure_Time");
+                String ArrivalTime = resultSet.getString("Arrival_Time");
+                String Terminal = resultSet.getString("Terminal");
+                flightlist.add(new Flight(FlightID, FlightNO, DepartureCity, ArrivalCity, DepartureTime, ArrivalTime, Terminal));
+            }
+
+
+            if (flightlist.isEmpty()) {
+                return null;
+            }
+        }
+        return flightlist;
     }
 
 

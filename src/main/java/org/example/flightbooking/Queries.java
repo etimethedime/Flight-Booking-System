@@ -28,6 +28,7 @@ public class Queries {
 
                 // For Flights
     public static final String GETFLIGHTS = "SELECT * FROM FLIGHTS"; // SELECT
+    public static final String GETAFLIGHT = "SELECT * FROM flights WHERE departure_city = ? OR arrival_city = ?;";
     public static final String USERFLIGHTS = "SELECT * FROM FLIGHTS_BOOKED WHERE Username = ?";
     public static final String BOOKFLIGHT = "INSERT INTO Flights_Booked (Username, Flight_ID, Seat_Number, DepartureCity, ArrivalCity, DepartureTime, ArrivalTime) VALUES (?, ?, ?, ?, ?, ?, ?)";
     public static final String CUSTDELETEFLIGHT = "DELETE FROM FLIGHTS_BOOKED WHERE Flight_ID = ?"; //DELETE

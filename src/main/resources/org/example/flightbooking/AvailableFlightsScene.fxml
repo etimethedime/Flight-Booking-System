@@ -17,8 +17,8 @@
             <children>
                 <HBox spacing="10.0">
                     <children>
-                        <TextField fx:id="departureCityTextField" prefWidth="200.0" promptText="From (Departure City)" />
-                        <TextField fx:id="arrivalCityTextField" prefWidth="200.0" promptText="To (Destination City)" />
+                        <TextField fx:id="DepartureFrom" prefWidth="200.0" promptText="From (Departure City)" />
+                        <TextField fx:id="ArrivalTo" prefWidth="200.0" promptText="To (Destination City)" />
                     </children>
                 </HBox>
                 <HBox spacing="10.0">
@@ -48,7 +48,7 @@
             </columns>
         </TableView>
         <Button layoutX="446.0" layoutY="668.0" onAction="#handleBookFlightButton" style="-fx-background-color: #88c488; -fx-text-fill: #ffffff; -fx-font-size: 17; -fx-background-radius: 10;" text="Book Flight" />
-            <Button fx:id="searchButton" layoutX="727.0" layoutY="100.0" prefHeight="33.0" prefWidth="130.0" style="-fx-background-color: #a8d5a8; -fx-text-fill: #ffffff; -fx-font-size: 17; -fx-background-radius: 10;" text="Search Flights" />
+            <Button fx:id="searchButton" layoutX="727.0" layoutY="100.0" onAction="#initializeFlightViewSearchTable" prefHeight="33.0" prefWidth="130.0" style="-fx-background-color: #a8d5a8; -fx-text-fill: #ffffff; -fx-font-size: 17; -fx-background-radius: 10;" text="Search Flights" />
             <Button layoutX="832.0" layoutY="151.0" onAction="#initializeFlightViewTable" style="-fx-background-color: #88c488; -fx-text-fill: #ffffff; -fx-font-size: 17; -fx-background-radius: 10;" text="Refresh page" />
     </children>
 </AnchorPane>

@@ -12,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -55,6 +56,10 @@ public class ControllerAvailableFlightsScene {
 
     @FXML
     private ComboBox<String> seatOptionComboBox;
+    @FXML
+    private TextField DepartureFrom;
+    @FXML
+    private TextField ArrivalTo;
 
 
 
@@ -70,6 +75,20 @@ public class ControllerAvailableFlightsScene {
 
     public void initializeFlightViewTable() throws SQLException {
         ObservableList<Flight> list = ControllerLogInScene.c1.getAllFlights();
+        FlightIDCol.setCellValueFactory(new PropertyValueFactory<>("FlightID"));
+        FlightNumberCol.setCellValueFactory(new PropertyValueFactory<>("FlightNO"));
+        DepartureCityCol.setCellValueFactory(new PropertyValueFactory<>("DepartureCity"));
+        ArrivalCityCol.setCellValueFactory(new PropertyValueFactory<>("ArrivalCity"));
+        DepartureTimeCol.setCellValueFactory(new PropertyValueFactory<>("DepartureTime"));
+        ArrivalTimeCol.setCellValueFactory(new PropertyValueFactory<>("ArrivalTime"));
+        TerminalCol.setCellValueFactory(new PropertyValueFactory<>("Terminal"));
+
+        tableView.setItems(list);
+        tableView.refresh();
+        System.out.println(list.toString());
+    }
+    public void initializeFlightViewSearchTable() throws SQLException {
+        ObservableList<Flight> list = ControllerLogInScene.c1.getSearchedFlights(DepartureFrom.getText(),ArrivalTo.getText());
         FlightIDCol.setCellValueFactory(new PropertyValueFactory<>("FlightID"));
         FlightNumberCol.setCellValueFactory(new PropertyValueFactory<>("FlightNO"));
         DepartureCityCol.setCellValueFactory(new PropertyValueFactory<>("DepartureCity"));

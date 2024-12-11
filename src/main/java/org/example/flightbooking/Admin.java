@@ -87,6 +87,36 @@ public class Admin extends Account implements AdminDBQ, CustomerDBQ{
         }
         return flightlist;
     }
+    @Override
+    public ObservableList<Flight> getSearchedFlights(String DepartureFrom, String ArrivalTo) throws SQLException {
+        ObservableList<Flight> flightlist = FXCollections.observableArrayList();
+
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(Queries.GETAFLIGHT);
+             ResultSet resultSet = preparedStatement.executeQuery()) {
+
+            preparedStatement.setString(1, DepartureFrom);
+            preparedStatement.setString(2, ArrivalTo);
+
+
+            while (resultSet.next()) {
+                String FlightID = resultSet.getString("Flight_ID");
+                String FlightNO = resultSet.getString("Flight_Number");
+                String DepartureCity = resultSet.getString("Departure_City");
+                String ArrivalCity = resultSet.getString("Arrival_City");
+                String DepartureTime = resultSet.getString("Departure_Time");
+                String ArrivalTime = resultSet.getString("Arrival_Time");
+                String Terminal = resultSet.getString("Terminal");
+                flightlist.add(new Flight(FlightID, FlightNO, DepartureCity, ArrivalCity, DepartureTime, ArrivalTime, Terminal));
+            }
+
+
+            if (flightlist.isEmpty()) {
+                return null;
+            }
+        }
+        return flightlist;
+    }
 
 
     @Override

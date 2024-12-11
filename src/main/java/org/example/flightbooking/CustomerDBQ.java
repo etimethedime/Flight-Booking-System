@@ -23,6 +23,7 @@ public interface CustomerDBQ {
     public ObservableList<FlightBooked> getUserFlights() throws SQLException;// should add a booked flight using INSERT query
 
     public ObservableList<Flight> getAllFlights () throws SQLException;
+    public ObservableList<Flight> getSearchedFlights(String DepartureFrom, String ArrivalTo) throws SQLException;
 
     //public void changePassword(String Password, String Username) throws SQLException; // should change password with new password using UPDATE query
 
