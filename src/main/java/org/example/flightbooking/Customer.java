@@ -158,7 +158,7 @@ public class Customer extends Account implements CustomerDBQ {
             connection.close();
         }
     }
-
+        Objec.equalsto( )
      */
     @Override
     public String bookFlight(String Username, String Flight_ID, String Seat_Number,
